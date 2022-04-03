@@ -1,5 +1,5 @@
 ﻿# pliroforiakaSistimatIstou2022
 
-To start the app:
-cd into /site/ folder
-npm start
+To start the react app:  
+cd into /pliroforiaka_app/ folder  
+npm start  
