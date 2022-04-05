@@ -1,0 +1,39 @@
+* {
+  background-color: #fcf6e7;
+}
+
+hr {
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+}
+
+.profiles {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.profile-item {
+  width: 14rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 4rem;
+}
+
+.profile-item img {
+  margin-top: 10px;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 110px;
+}
+
+.asdf h2 {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
