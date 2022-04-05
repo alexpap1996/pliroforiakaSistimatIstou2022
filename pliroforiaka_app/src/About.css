@@ -1,11 +1,5 @@
-* {
+.my_Container {
   background-color: #fcf6e7;
-}
-
-hr {
-  height: 1px;
-  background-color: #ccc;
-  border: none;
 }
 
 .profiles {
