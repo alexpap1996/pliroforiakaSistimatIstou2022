@@ -2,11 +2,7 @@
 
 ## Project for Web Application course !
 
-<br>
-
 ### Prerequisites 📋
-
-<br>
 
 ```
 node
@@ -15,8 +11,6 @@ git
 ```
 
 ## How To Use 🔧
-
-<br>
 
 ```bash
 # Move into the repository

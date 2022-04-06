@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import "../About.css";
+import { text } from "./variables";
 import Alex from "../resources/Alex.jpg";
 import Daxada from "../resources/Jim.jpg";
 import Jim from "../resources/Daxada.jpg";
@@ -33,7 +34,7 @@ const info = [
 const About = () => {
   return (
     <>
-      <div class="my_Container">
+      <div className="my_Container">
         {/* <hr /> */}
         <motion.div
           className="dropdown"
@@ -53,13 +54,7 @@ const About = () => {
           transition={{ duration: 0.5, delay: 1 }}
           style={{ margin: 50 }}
         >
-          Στην ιστοσελίδα μας σας έχουμε ομαδοποιήσει και παρουσιάσει ορισμένες
-          πρακτικές που θα βοηθήσουν στην ομαλή μετάβαση ενός πιο φιλικού προς
-          το περιβάλλον τρόπου ζωής και στην επαγρύπνηση για την χρήση της
-          ατομικής προσπάθειας. Παράλληλα ο κάθε χρήστης θα έχει την δυνατότητα
-          να προσθέσει και εκείνος το δικό του άρθρο εφόσον το επιθυμεί
-          συμβάλλοντας ενεργά στην ενίσχυση της παγκόσμιας οικολογικής
-          συνείδησης.
+          {text}
         </motion.div>
         <br />
         <div className="profiles">
@@ -69,14 +64,15 @@ const About = () => {
               whileHover={{ scale: 1.15 }}
               transition={{ duration: 0.5, type: "tween" }}
               className="profile-item"
-              key={info.title + index}
+              key={info.fname + index}
             >
-              <h2 className="bold-text" style={{ marginTop: -70 }}>
+              <h2
+                className="bold-text"
+                style={{ marginTop: -70, textAlign: "center" }}
+              >
                 {info.fname}
               </h2>
-              <div className="test">
-                <img src={info.imgURL} alt={info.fname} />
-              </div>
+              <img src={info.imgURL} alt={info.fname} />
               <p className="p-text" style={{ marginTop: 20 }}>
                 {info.description}
                 <br />
