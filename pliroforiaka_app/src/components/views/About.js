@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import "../styles/About.css";
+import siteInfo from "../siteInfo";
 
-import "../About.css";
-import variables from "./variables";
 // import SearchBox from "./SearchBox";
 
-const { about_text, developerInfo: info } = variables;
+const { aboutText, developerInfo: info } = siteInfo;
 
 const About = () => {
   return (
@@ -30,7 +30,7 @@ const About = () => {
           transition={{ duration: 0.5, delay: 1 }}
           style={{ margin: 50 }}
         >
-          {about_text}
+          {aboutText}
         </motion.div>
         {/* <SearchBox /> */}
         <br />

@@ -1,0 +1,13 @@
+h1 {
+    font-size: 5rem;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 100;
+}
+
+.body-full {
+    height:80vh;
+}
