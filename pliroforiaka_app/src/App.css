@@ -12,6 +12,10 @@ html {
   font-size: 1.2rem;
 }
 
+.background-custom {
+  background-color: var(--color-white);
+}
+
 .hover-dark:hover {
   filter: brightness(85%);
   transition: 0.15s ease-in-out;
