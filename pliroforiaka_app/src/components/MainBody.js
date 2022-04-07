@@ -1,10 +1,12 @@
+import About from "./About"
 
-function MainBody () {
-	return (
-		<div className="container c-bg-white">
-			asdf
-		</div>
-	)
+function MainBody() {
+  const PageToReturn = About
+  return (
+    <>
+      <PageToReturn />
+    </>
+  );
 }
 
 export default MainBody;
