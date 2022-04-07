@@ -1,15 +1,20 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import MainBody from "./components/MainBody";
-
+import { Helmet } from "react-helmet";
+import Contact from "./components/ContactForm";
 
 function App() {
   return (
-    <div className="background-custom">
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Make it Green</title>
+        <link rel="canonical" href="" />
+        <meta name="description" content="Helmet application" />
+      </Helmet>
       <Navbar />
-      <MainBody />
-    </div>
+      <Contact />
+    </>
   );
 }
 
