@@ -2,7 +2,7 @@ import Alex from "../resources/Alex.jpg";
 import Daxada from "../resources/Jim.jpg";
 import Jim from "../resources/Daxada.jpg";
 
-const about_text =
+const aboutText =
   "Στην ιστοσελίδα μας σας έχουμε ομαδοποιήσει και παρουσιάσει ορισμένες" +
   "πρακτικές που θα βοηθήσουν στην ομαλή μετάβαση ενός πιο φιλικού προς" +
   "το περιβάλλον τρόπου ζωής και στην επαγρύπνηση για την χρήση της" +
@@ -35,9 +35,9 @@ const developerInfo = [
   },
 ];
 
-const variables = {
-  about_text,
+const exportObj = {
+  aboutText,
   developerInfo,
-};
+}
 
-export default variables;
+export default exportObj;
