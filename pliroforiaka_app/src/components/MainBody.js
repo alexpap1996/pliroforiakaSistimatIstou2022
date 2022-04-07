@@ -1,5 +1,12 @@
+import About from "./About"
+
 function MainBody() {
-  return <div className="container c-bg-white">test test test 11231231223</div>;
+  const PageToReturn = About
+  return (
+    <>
+      <PageToReturn />
+    </>
+  );
 }
 
 export default MainBody;
