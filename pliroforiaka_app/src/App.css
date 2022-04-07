@@ -2,10 +2,9 @@
   --color-black: #00260f;
   --color-white: #fcf6e7;
   --color-lightblue: #9cdace;
-  --color-grey: #E1EEC7;
+  --color-grey: #e1eec7;
   --color-yellow: #e5b446;
   --color-green: #61840d;
-  
 }
 
 html {
@@ -13,9 +12,13 @@ html {
   font-size: 1.2rem;
 }
 
+.background-custom {
+  background-color: var(--color-white);
+}
+
 .hover-dark:hover {
   filter: brightness(85%);
-  transition: .15s ease-in-out
+  transition: 0.15s ease-in-out;
 }
 
 .hover-cursor:hover {
@@ -48,4 +51,3 @@ html {
 .c-bg-yellow {
   background-color: var(--color-yellow) !important;
 }
-

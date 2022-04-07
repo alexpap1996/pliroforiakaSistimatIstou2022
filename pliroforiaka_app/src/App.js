@@ -6,10 +6,10 @@ import About from "./components/About";
 
 function App() {
   return (
-    <>
+    <div className="background-custom">
       <Navbar />
       <About />
-    </>
+    </div>
   );
 }
 

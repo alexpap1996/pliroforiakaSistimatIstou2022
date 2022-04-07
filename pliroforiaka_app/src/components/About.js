@@ -2,39 +2,15 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import "../About.css";
-import { text } from "./variables";
-import Alex from "../resources/Alex.jpg";
-import Daxada from "../resources/Jim.jpg";
-import Jim from "../resources/Daxada.jpg";
+import variables from "./variables";
+// import SearchBox from "./SearchBox";
 
-const info = [
-  {
-    fname: "Δημήτρης",
-    description:
-      "Undergraduate Student in Computer Science from the Aristotle University of Thessaloniki",
-    interests: "Penetration Testing & Traveling",
-    imgURL: Daxada,
-  },
-  {
-    fname: "Αλέξανδρος",
-    description:
-      "Undergraduate Student in Computer Science from the Aristotle University of Thessaloniki",
-    interests: "Data-Web Management & CS:GO",
-    imgURL: Alex,
-  },
-  {
-    fname: "Τριαντάφυλλος",
-    description:
-      "Undergraduate Student in Computer Science from the Aristotle University of Thessaloniki",
-    interests: "Web Development & Football",
-    imgURL: Jim,
-  },
-];
+const { about_text, developerInfo: info } = variables;
 
 const About = () => {
   return (
     <>
-      <div className="my_Container">
+      <div className="container my_Container">
         {/* <hr /> */}
         <motion.div
           className="dropdown"
@@ -54,8 +30,9 @@ const About = () => {
           transition={{ duration: 0.5, delay: 1 }}
           style={{ margin: 50 }}
         >
-          {text}
+          {about_text}
         </motion.div>
+        {/* <SearchBox /> */}
         <br />
         <div className="profiles">
           {info.map((info, index) => (
