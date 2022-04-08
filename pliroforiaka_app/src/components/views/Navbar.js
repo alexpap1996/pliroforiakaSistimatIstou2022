@@ -45,7 +45,7 @@ function Navbar(state) {
                   <a className="nav-link" href="#" onClick={() => changePageNameFn('About')}>About</a>
               </li>
               <li className="nav-item">
-                  <button className="btn hover-dark c-bg-green me-2" type="submit">Συνδεση</button>
+                  <button className="btn hover-dark c-bg-green me-2" type="submit" onClick={() => changePageNameFn('Login')}>Συνδεση</button>
               </li>
               <li className="nav-item">
                   <button className="btn me-2 hover-dark c-bg-green" type="submit">Εγγραφή</button>

@@ -3,20 +3,38 @@ import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/views/Navbar";
 import MainBody from "./components/MainBody";
+import staticData from './staticData'
+
+const { users, articles } = staticData
 
 class App extends React.Component {
   state = {
-    pageName: 'ErrorPage'
+    pageName: 'Home',
   }
+
+  
 
   constructor(props) {
     super(props)
 
     this.changePageName = this.changePageName.bind(this)
+    this.validateUser = this.validateUser.bind(this)
+    this.getArticles = this.getArticles.bind(this)
   }
 
-  changePageName(pageName) {
+  changePageName (pageName) {
     this.setState({pageName});
+  }
+
+  validateUser (username, password) {
+    const user = users.find(user => {
+      return user.username === username && user.password === password
+    })
+    return user
+  }
+
+  getArticles (filter) {
+    return articles
   }
 
   render() {
@@ -28,6 +46,8 @@ class App extends React.Component {
         <MainBody 
           pageName={this.state.pageName}
           changePageNameFn={this.changePageName}
+          validateUserFn={this.validateUser}
+          getArticles={this.getArticles}
         />
       </div>
     )
