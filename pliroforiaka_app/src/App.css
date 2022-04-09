@@ -13,6 +13,10 @@ html {
   overflow-y: scroll;
 }
 
+.background-custom {
+  background-color: var(--color-white);
+}
+
 .hover-dark:hover {
   filter: brightness(85%);
   transition: 0.15s ease-in-out;
