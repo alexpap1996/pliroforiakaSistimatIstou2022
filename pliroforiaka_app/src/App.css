@@ -10,6 +10,7 @@
 html {
   background-color: var(--color-white);
   font-size: 1.2rem;
+  overflow-y: scroll;
 }
 
 .hover-dark:hover {
