@@ -32,9 +32,9 @@ body {
 }
 
 .contact-links {
-  background-color: #1f2e43;
-  background: radial-gradient(circle at 55% 92%, #426691 0 12%, transparent 12.2%), radial-gradient(circle at 94% 72%, #426691 0 10%, transparent 10.2%), radial-gradient(circle at 20% max(78%, 350px), #263a53 0 7%, transparent 7.2%),
-    radial-gradient(circle at 0% 0%, #263a53 0 40%, transparent 40.2%), #1f2e43;
+  background-color: #198754;
+  background: radial-gradient(circle at 55% 92%, #377137 0 12%, transparent 12.2%), radial-gradient(circle at 94% 72%, #429142 0 10%, transparent 10.2%), radial-gradient(circle at 20% max(78%, 350px), #287e3b 0 7%, transparent 7.2%),
+    radial-gradient(circle at 0% 0%, #09230a 0 40%, transparent 40.2%), #198754;
   border-radius: 10px 0 0 10px;
 }
 
@@ -65,7 +65,7 @@ body {
   }
 }
 
-h2 {
+.contactTitle {
   font-family: "Arimo", sans-serif;
   color: #fff;
   font-size: clamp(30px, 6vw, 60px);
@@ -86,19 +86,19 @@ h2 {
   cursor: pointer;
 }
 
-img:not(.noFilter) {
+.contactImg {
   width: 45px;
   height: 45px;
-  filter: hue-rotate(220deg) drop-shadow(2px 4px 4px #0006);
+  filter: hue-rotate(220deg) drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.4));
   transition: 0.2s;
   user-select: none;
 }
 
-img:hover {
+.contactImg:hover {
   transform: scale(1.1, 1.1);
 }
 
-img:active {
+.contactImg:active {
   transform: scale(1.1, 1.1);
   filter: hue-rotate(220deg) drop-shadow(2px 4px 4px #222) sepia(0.3);
 }

@@ -59,26 +59,26 @@ const ContactForm = () => {
       <section id="contact">
         <div className="contact-box">
           <div className="contact-links">
-            <h2>Επικοινωνία</h2>
+            <h2 className="contactTitle">Επικοινωνία</h2>
             <div className="links">
               <div className="link">
                 <a href="linkedin.com">
-                  <img src="https://i.postimg.cc/m2mg2Hjm/linkedin.png" alt="linkedin" />
+                  <img class="contactImg" src="https://i.postimg.cc/m2mg2Hjm/linkedin.png" alt="linkedin" />
                 </a>
               </div>
               <div className="link">
                 <a href="https://github.com/alexpap1996/pliroforiakaSistimatIstou2022">
-                  <img src="https://i.postimg.cc/YCV2QBJg/github.png" alt="github" />
+                  <img class="contactImg" src="https://i.postimg.cc/YCV2QBJg/github.png" alt="github" />
                 </a>
               </div>
               <div className="link">
                 <a href="codepen.io">
-                  <img src="https://i.postimg.cc/W4Znvrry/codepen.png" alt="codepen" />
+                  <img class="contactImg" src="https://i.postimg.cc/W4Znvrry/codepen.png" alt="codepen" />
                 </a>
               </div>
               <div className="link">
                 <a href="gmail.com">
-                  <img src="https://i.postimg.cc/NjLfyjPB/email.png" alt="email" />
+                  <img class="contactImg" src="https://i.postimg.cc/NjLfyjPB/email.png" alt="email" />
                 </a>
               </div>
             </div>
