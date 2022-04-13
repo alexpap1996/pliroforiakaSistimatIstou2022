@@ -4,6 +4,7 @@ import About from "./views/About"
 import ErrorPage from './views/ErrorPage'
 import Articles from "./views/Articles";
 import CommunicationPage from "./views/CommunicationPage";
+import Login from "./views/Login";
 
 const pageMap = {
   'Home': HomePage,
@@ -11,22 +12,21 @@ const pageMap = {
   'ErrorPage': ErrorPage,
   'Articles': Articles,
   'CommunicationPage': CommunicationPage,
+  'Login': Login
 } 
 
 function MainBody(state) {
-  const { pageName, changePageNameFn } = state
+  const { pageName, changePageNameFn, validateUserFn } = state
   const PageToReturn = pageMap[pageName]
+
   return (
     <>
       <PageToReturn 
         changePageNameFn={changePageNameFn}
+        validateUserFn={validateUserFn}
       />
     </>
   );
-}
-
-function search () {
-
 }
 
 export default MainBody;
