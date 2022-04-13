@@ -43,9 +43,9 @@ function Articles(state) {
       {/* <div className="d-flex flex-column align-items-center justify-content-center body-full">
         <h1 className="flex-column">Articles</h1>
         <h2 className="flex-column">Under Construction</h2> */}
-
       <span className="asdf"> Articles</span>
-      <div className="articles_test">
+
+      {/* <div className="articles_test">
         {articles_info.map((articles_info, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
@@ -69,6 +69,27 @@ function Articles(state) {
               Read more
             </button>
           </motion.div>
+        ))}
+      </div> */}
+      <div className="myContainer">
+        {articles_info.map((articles_info, index) => (
+          <div className="card myCard mx-3">
+            <img
+              className="card-img-top myimg"
+              src={articles_info.article_imgURL}
+              alt="article"
+            />
+            <div className="card-body d-flex flex-column">
+              <h5 className="card-title">{articles_info.article_title}</h5>
+              <p className="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <button className="btn mt-auto hover-dark c-bg-green bottom mybtn">
+                Read more
+              </button>
+            </div>
+          </div>
         ))}
       </div>
 

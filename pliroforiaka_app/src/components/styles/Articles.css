@@ -26,11 +26,32 @@
   justify-content: center;
   /* font-family: Gabriola; */
   font-size: 3em;
-  border: 2px solid rgb(0, 139, 86);
+  /* border: 2px solid rgb(0, 139, 86); */
   /* -moz-box-shadow: 4px 4px 5px #888888;
   -ms-box-shadow: 4px 4px 5px #888888;
   -webkit-box-shadow: 4px 4px 5px #888888;
   -p-box-shadow: 4px 4px 5px #888888;
   box-shadow: 2px 4px 5px #888888; */
   margin-top: 10px;
+}
+
+.myimg {
+  width: 343px;
+  height: 300px;
+}
+
+.myCard {
+  width: 20rem;
+  margin-top: 20px;
+}
+
+.myContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.mybtn {
+  align-self: flex-start;
 }
