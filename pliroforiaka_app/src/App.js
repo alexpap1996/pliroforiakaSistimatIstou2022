@@ -46,7 +46,12 @@ class App extends React.Component {
           <meta name="description" content="Helmet application" />
         </Helmet>
         <Navbar changePageNameFn={this.changePageName} />
-        <MainBody pageName={this.state.pageName} changePageNameFn={this.changePageName} validateUserFn={this.validateUser} getArticles={this.getArticles} />
+        <MainBody
+          pageName={this.state.pageName}
+          changePageNameFn={this.changePageName}
+          validateUserFn={this.validateUser}
+          getArticles={this.getArticles}
+        />
       </div>
     );
   }
