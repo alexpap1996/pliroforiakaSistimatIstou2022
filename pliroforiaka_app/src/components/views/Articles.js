@@ -58,7 +58,7 @@ const Articles = (state) => {
     <>
       <span className="title">Articles</span>
       {searchTerm && displayingResultsText(searchTerm)}
-      <div className="myContainer">
+      <div className="container article-container">
         {filteredArticles}
       </div>
       <button
