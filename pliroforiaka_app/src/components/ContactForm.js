@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ContactForm.css";
+// import "./ContactForm.css";
 import ContactCard from "./ContactCard";
 
 const ContactForm = () => {

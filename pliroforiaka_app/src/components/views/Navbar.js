@@ -1,7 +1,8 @@
 import mainLogo from "../../resources/gardenblack.png";
 import SearchBox from "../SearchBox";
+import { useState } from "react";
 function Navbar(state) {
-  const { changePageNameFn } = state;
+  const { changePageNameFn, updateSearchTerm } = state;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light c-bg-white">
@@ -54,7 +55,7 @@ function Navbar(state) {
                 Άρθρα
               </a>
             </li>
-            <SearchBox />
+            <SearchBox updateSearchTerm={updateSearchTerm}/>
           </ul>
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">

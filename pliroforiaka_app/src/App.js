@@ -11,6 +11,8 @@ const { users, articles } = staticData;
 class App extends React.Component {
   state = {
     pageName: "Home",
+    searchTerm: "",
+    pageData: undefined
   };
 
   constructor(props) {
@@ -18,11 +20,11 @@ class App extends React.Component {
 
     this.changePageName = this.changePageName.bind(this);
     this.validateUser = this.validateUser.bind(this);
-    this.getArticles = this.getArticles.bind(this);
+    this.updateSearchTerm = this.updateSearchTerm.bind(this)
   }
 
-  changePageName(pageName) {
-    this.setState({ pageName });
+  changePageName(pageName, pageData) {
+    this.setState({ pageName, pageData });
   }
 
   validateUser(username, password) {
@@ -32,8 +34,8 @@ class App extends React.Component {
     return user;
   }
 
-  getArticles(filter) {
-    return articles;
+  updateSearchTerm (searchTerm) {
+    this.setState({searchTerm})
   }
 
   render() {
@@ -45,9 +47,11 @@ class App extends React.Component {
           <link rel="canonical" href="" />
           <meta name="description" content="Helmet application" />
         </Helmet>
-        <Navbar changePageNameFn={this.changePageName} />
+        <Navbar changePageNameFn={this.changePageName} updateSearchTerm={this.updateSearchTerm}/>
         <MainBody
           pageName={this.state.pageName}
+          searchTerm={this.state.searchTerm}
+          pageData={this.state.pageData}
           changePageNameFn={this.changePageName}
           validateUserFn={this.validateUser}
           getArticles={this.getArticles}
