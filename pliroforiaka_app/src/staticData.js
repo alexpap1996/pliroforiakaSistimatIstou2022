@@ -2,9 +2,15 @@
     TEMP FILE BECAUSE THERE IS NOT DB YET
     WILL BE DELETED LATER
 */
+import water from "./resources/water.jpg";
+import evoia from "./resources/evoia.jpg";
+import bitcoin from "./resources/bitcoin.jpg";
+import gardening from "./resources/gardening.png";
+import solarenergy from "./resources/solar-energy.png";
 
 class User {
-    constructor (firstname, lastname, role, password, id) {
+    constructor (username, firstname, lastname, role, password, id) {
+        this.username = username
         this.firstname = firstname
         this.lastname = lastname
         this.role = role
@@ -26,33 +32,67 @@ class Article {
         this.authorId = authorId
         this.dateCreated = dateCreated ?? Date.now()
         this.articleId = articleId
+        this.articleDescription = 'Article Description'
     }
 }
 
 const users = []
-const articles = []
+const articleArray = []
 
-users.push(new User('Alex', 'Pap', 'Admin', 'password', 1))
-users.push(new User('Dimitris', 'Galanis', 'Admin', 'password', 2))
-users.push(new User('Triantafillos', 'Example', 'Admin', 'password', 3))
-users.push(new User('Jane', 'Doe', 'User', 'password', 4))
+users.push(new User('alexpap', 'Alex', 'Pap', 'Admin', 'password', 1))
+users.push(new User('jimgal', 'Dimitris', 'Galanis', 'Admin', 'password', 2))
+users.push(new User('triant', 'Triantafillos', 'Example', 'Admin', 'password', 3))
+users.push(new User('jdoe', 'Jane', 'Doe', 'User', 'password', 4))
 
-articles.push(new Article(
-    'Article 1',
+articleArray.push(new Article(
+    'Protect your groundwater',
     'This is the body of the article This is the body of the article This is the body of the article',
-    './resources/Alex.jpg',
+    water,
     1,
     undefined,
     1
 ))
-articles.push(new Article(
-    'Article 2',
+articleArray.push(new Article(
+    'Fire Hazard Protection',
     'This is the body of the article This is the body of the article This is the body of the article',
-    './resources/Daxada.jpg',
+    evoia,
     1,
     undefined,
     2
 ))
+
+articleArray.push(new Article(
+    'Bitcoin under pressure to adopt more sustainable practices',
+    'This is the body of the article This is the body of the article This is the body of the article',
+    bitcoin,
+    1,
+    undefined,
+    3
+))
+
+articleArray.push(new Article(
+    'Eco friendly gardening',
+    'This is the body of the article This is the body of the article This is the body of the article',
+    gardening,
+    1,
+    undefined,
+    4
+))
+
+articleArray.push(new Article(
+    'Solar Energy',
+    'This is the body of the article This is the body of the article This is the body of the article',
+    solarenergy,
+    1,
+    undefined,
+    5
+))
+
+const articles = articleArray.reduce((acc, curr) => {
+    const article = { [curr.articleId]: curr }
+    acc = { ...acc, ...article }
+    return acc
+}, {})
 
 const exportObj = {
     users,
