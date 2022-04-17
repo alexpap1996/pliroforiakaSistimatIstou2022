@@ -7,7 +7,11 @@ const ContactCard = (props) => {
         <div className="row g-0">
           <div className="col-md-2">
             <div className="ratio ratio-1x1">
-              <img src={props.imgUrl} className="noFilter img-fluid rounded-start embed-responsive embed-responsive-16by9" alt="" />
+              <img
+                src={props.imgUrl}
+                className="noFilter img-fluid rounded-start embed-responsive embed-responsive-16by9"
+                alt=""
+              />
             </div>
           </div>
           <div className="col-md-8">

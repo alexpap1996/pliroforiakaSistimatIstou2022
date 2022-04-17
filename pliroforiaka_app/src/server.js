@@ -25,6 +25,11 @@ contactEmail.verify((error) => {
   }
 });
 
+app.get("articles/:id",(req,res)=>{
+  const {id} = req.params;
+  res.render("show")
+})
+
 router.post("/contact", (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
