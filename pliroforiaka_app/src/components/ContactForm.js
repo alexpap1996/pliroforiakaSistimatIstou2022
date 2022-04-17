@@ -68,7 +68,7 @@ const ContactForm = () => {
             <h2 className="contactTitle">Επικοινωνία</h2>
             <div className="links">
               <div className="link">
-                <a href="linkedin.com">
+                <a href="https://linkedin.com">
                   <img
                     className="contactImg"
                     src="https://i.postimg.cc/m2mg2Hjm/linkedin.png"
@@ -86,7 +86,7 @@ const ContactForm = () => {
                 </a>
               </div>
               <div className="link">
-                <a href="codepen.io">
+                <a href="https://codepen.io">
                   <img
                     className="contactImg"
                     src="https://i.postimg.cc/W4Znvrry/codepen.png"
@@ -95,7 +95,7 @@ const ContactForm = () => {
                 </a>
               </div>
               <div className="link">
-                <a href="gmail.com">
+                <a href="https://gmail.com">
                   <img
                     className="contactImg"
                     src="https://i.postimg.cc/NjLfyjPB/email.png"

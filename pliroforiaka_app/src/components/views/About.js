@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "../styles/About.css";
-import siteInfo from "../siteInfo";
-
-// import SearchBox from "./SearchBox";
-
-const { aboutText, developerInfo: info } = siteInfo;
+import { aboutText, developerInfo } from "../siteInfo";
 
 const About = () => {
   return (
@@ -35,30 +31,30 @@ const About = () => {
         {/* <SearchBox /> */}
         <br />
         <div className="profiles">
-          {info.map((info, index) => (
+          {developerInfo.map((developerInfo, index) => (
             <motion.div
               whileInView={{ opacity: 1 }}
               whileHover={{ scale: 1.15 }}
               transition={{ duration: 0.5, type: "tween" }}
               className="profile-item"
-              key={info.fname + index}
+              key={developerInfo.fname + index}
             >
               <h2
                 className="bold-text"
                 style={{ marginTop: -70, textAlign: "center" }}
               >
-                {info.fname}
+                {developerInfo.fname}
               </h2>
-              <img src={info.imgURL} alt={info.fname} />
+              <img src={developerInfo.imgURL} alt={developerInfo.fname} />
               <p className="p-text" style={{ marginTop: 20 }}>
-                {info.description}
+                {developerInfo.description}
                 <br />
                 <b>
                   <i>
                     <u>Interests</u>:&nbsp;
                   </i>
                 </b>
-                {info.interests}
+                {developerInfo.interests}
               </p>
             </motion.div>
           ))}

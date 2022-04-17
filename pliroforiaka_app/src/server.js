@@ -40,6 +40,7 @@ router.post("/contact", (req, res) => {
     subject: "Contact Form Message",
     html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
   };
+
   contactEmail.sendMail(mail, (error) => {
     if (error) {
       res.json({ status: "ERROR" });
@@ -47,4 +48,9 @@ router.post("/contact", (req, res) => {
       res.json({ status: "Message Sent" });
     }
   });
+});
+
+app.get("articles/:articleId", (req, res) => {
+  const { articlesId } = req.params;
+  res.render(articlesId);
 });
