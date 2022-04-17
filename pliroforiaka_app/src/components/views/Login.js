@@ -1,6 +1,6 @@
 import '../styles/ErrorPage.css';
 import '../styles/Formstyle.css';
-import React, { setState, useState, useEffect } from "react";
+import React from "react";
 import mainLogo from '../../resources/gardenblack.png'
 
 let currUsername = ''
@@ -27,7 +27,7 @@ const Login = (props) => {
         <div
             className="narrow-form d-flex flex-column align-items-center pt-5"
         >
-            <img className="mb-4" src={mainLogo} width="72" height="72"></img>
+            <img className="mb-4" src={mainLogo} width="72" height="72" alt="main logo"></img>
             <h2 className="mb-4">Please log in</h2>
             <div className="form-outline mb-4">
                 <input type="text" id="loginUsername" name="loginUsername" className="form-control" onChange={(event) => {
@@ -36,7 +36,7 @@ const Login = (props) => {
                 <label className="form-label" htmlFor="loginUsername">Email address</label>
             </div>
             <div className="form-outline mb-4">
-                <input type="text" id="loginPassword" name="loginPassword" className="form-control" onChange={(event) => {
+                <input type="password" id="loginPassword" name="loginPassword" className="form-control" onChange={(event) => {
                     currPassword = event.target.value
                 }}/>
                 <label className="form-label" htmlFor="loginPassword">Password</label>
