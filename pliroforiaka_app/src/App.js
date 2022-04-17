@@ -12,7 +12,8 @@ class App extends React.Component {
   state = {
     pageName: "Home",
     searchTerm: "",
-    pageData: undefined
+    pageData: undefined,
+    loginError: undefined,
   };
 
   constructor(props) {
@@ -21,6 +22,8 @@ class App extends React.Component {
     this.changePageName = this.changePageName.bind(this);
     this.validateUser = this.validateUser.bind(this);
     this.updateSearchTerm = this.updateSearchTerm.bind(this)
+    this.setLoginError = this.setLoginError.bind(this)
+    this.setCurrentUser = this.setCurrentUser.bind(this)
   }
 
   changePageName(pageName, pageData) {
@@ -38,6 +41,14 @@ class App extends React.Component {
     this.setState({searchTerm})
   }
 
+  setLoginError (loginError) {
+    this.setState({loginError})
+  }
+
+  setCurrentUser (loggedInUser) {
+    this.setState({loggedInUser})
+  }
+
   render() {
     return (
       <div className="background-custom">
@@ -52,9 +63,11 @@ class App extends React.Component {
           pageName={this.state.pageName}
           searchTerm={this.state.searchTerm}
           pageData={this.state.pageData}
+          loginError={this.state.loginError}
           changePageNameFn={this.changePageName}
           validateUserFn={this.validateUser}
-          getArticles={this.getArticles}
+          setLoginErrorFn={this.setLoginError}
+          setCurrentUserFn={this.setCurrentUser}
         />
       </div>
     );

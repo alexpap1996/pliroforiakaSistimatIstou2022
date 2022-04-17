@@ -18,7 +18,7 @@ const pageMap = {
 } 
 
 function MainBody(state) {
-  const { pageName, changePageNameFn, validateUserFn, searchTerm, pageData } = state
+  const { pageName, changePageNameFn, validateUserFn, searchTerm, pageData, setLoginErrorFn, loginError, setCurrentUserFn } = state
   const PageToReturn = pageMap[pageName]
 
   return (
@@ -26,6 +26,9 @@ function MainBody(state) {
       <PageToReturn 
         changePageNameFn={changePageNameFn}
         validateUserFn={validateUserFn}
+        setLoginError={setLoginErrorFn}
+        setCurrentUser={setCurrentUserFn}
+        loginError={loginError}
         searchTerm={searchTerm}
         pageData={pageData}
       />

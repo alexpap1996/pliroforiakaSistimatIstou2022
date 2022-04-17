@@ -9,7 +9,8 @@ import gardening from "./resources/gardening.png";
 import solarenergy from "./resources/solar-energy.png";
 
 class User {
-    constructor (firstname, lastname, role, password, id) {
+    constructor (username, firstname, lastname, role, password, id) {
+        this.username = username
         this.firstname = firstname
         this.lastname = lastname
         this.role = role
@@ -38,10 +39,10 @@ class Article {
 const users = []
 const articleArray = []
 
-users.push(new User('Alex', 'Pap', 'Admin', 'password', 1))
-users.push(new User('Dimitris', 'Galanis', 'Admin', 'password', 2))
-users.push(new User('Triantafillos', 'Example', 'Admin', 'password', 3))
-users.push(new User('Jane', 'Doe', 'User', 'password', 4))
+users.push(new User('alexpap', 'Alex', 'Pap', 'Admin', 'password', 1))
+users.push(new User('jimgal', 'Dimitris', 'Galanis', 'Admin', 'password', 2))
+users.push(new User('triant', 'Triantafillos', 'Example', 'Admin', 'password', 3))
+users.push(new User('jdoe', 'Jane', 'Doe', 'User', 'password', 4))
 
 articleArray.push(new Article(
     'Protect your groundwater',
