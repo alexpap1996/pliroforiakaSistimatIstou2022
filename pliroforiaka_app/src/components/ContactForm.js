@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ContactForm.css";
+// import "./ContactForm.css";
 import ContactCard from "./ContactCard";
 
 const ContactForm = () => {
@@ -68,9 +68,9 @@ const ContactForm = () => {
             <h2 className="contactTitle">Επικοινωνία</h2>
             <div className="links">
               <div className="link">
-                <a href="https://linkedin.com">
+                <a href="linkedin.com">
                   <img
-                    className="contactImg"
+                    class="contactImg"
                     src="https://i.postimg.cc/m2mg2Hjm/linkedin.png"
                     alt="linkedin"
                   />
@@ -79,14 +79,14 @@ const ContactForm = () => {
               <div className="link">
                 <a href="https://github.com/alexpap1996/pliroforiakaSistimatIstou2022">
                   <img
-                    className="contactImg"
+                    class="contactImg"
                     src="https://i.postimg.cc/YCV2QBJg/github.png"
                     alt="github"
                   />
                 </a>
               </div>
               <div className="link">
-                <a href="https://codepen.io">
+                <a href="codepen.io">
                   <img
                     className="contactImg"
                     src="https://i.postimg.cc/W4Znvrry/codepen.png"
@@ -95,9 +95,9 @@ const ContactForm = () => {
                 </a>
               </div>
               <div className="link">
-                <a href="https://gmail.com">
+                <a href="gmail.com">
                   <img
-                    className="contactImg"
+                    class="contactImg"
                     src="https://i.postimg.cc/NjLfyjPB/email.png"
                     alt="email"
                   />

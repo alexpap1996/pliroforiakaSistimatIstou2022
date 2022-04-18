@@ -8,11 +8,12 @@
   margin: 30px;
 }
 
-.myContainer {
+.article-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 10px;
+  
 }
 
 .mybtn {

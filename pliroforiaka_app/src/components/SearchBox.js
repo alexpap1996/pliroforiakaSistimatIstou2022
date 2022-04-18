@@ -1,7 +1,8 @@
 import React from "react";
 
 const SearchBox = (props) => {
-  const setTerm = props.setTerm;
+  const { updateSearchTerm } = props;
+  let currentTerm = ""
   return (
     <form className="d-flex">
       <div className="input-group">
@@ -12,12 +13,15 @@ const SearchBox = (props) => {
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
           onChange={(event) => {
-            setTerm(event.target.value);
+            currentTerm = event.target.value;
           }}
         />
         <span
           className="input-group-text c-bg-green hover-dark hover-cursor"
           id="basic-addon2"
+          onClick={(event) => {
+            updateSearchTerm(currentTerm);
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
