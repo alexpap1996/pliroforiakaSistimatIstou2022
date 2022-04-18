@@ -1,34 +1,20 @@
 import "./HomeCard.css";
-import "./styles/Articles.css";
-import "./styles/ErrorPage.css";
 
-const HomeCard = (props) => {
-  const link = "http://localhost:5000/articles/" + props.article.id;
-
-  const handleClick = async () => {
-    const id = props.article.id;
-    await fetch("http://localhost", {
-      method: "GET",
-      body: id,
-    });
-  };
-
+const HomeCard = () => {
   return (
     <div className="card homeCard mx-3">
       <img
-        src={props.article.article_imgURL}
-        className="card-img-top myimg"
+        src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png"
+        className="card-img-top"
         alt="article"
       />
-      <div className="card-body d-flex flex-column">
-        <h5 className="card-title">{props.article.article_title}</h5>
-        <p className="card-text">{props.article.article_description}</p>
-        <a
-          onClick={handleClick}
-          href={link}
-          className="btn mt-auto hover-dark c-bg-green bottom mybtn"
-          method="get"
-        >
+      <div className="card-body">
+        <h5 className="card-title">Card title</h5>
+        <p className="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </p>
+        <a href="ArticleLinkPlaceholder" className="btn btn-primary">
           Link to Article
         </a>
       </div>
