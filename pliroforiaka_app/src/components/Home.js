@@ -1,13 +1,12 @@
 import "./Home.css";
 import HomeCard from "./HomeCard";
-import staticData from "../staticData";
+import { articles_info } from "./siteInfo";
 
 const Home = () => {
-  const { articles } = staticData;
   return (
     <>
       <div
-        id="carouselExampleFade"
+        id="carouselFade"
         className="carousel slide carousel-fade carousel-dark"
         data-bs-ride="carousel"
       >
@@ -44,7 +43,7 @@ const Home = () => {
         <button
           className="carousel-control-prev"
           type="button"
-          data-bs-target="#carouselExampleFade"
+          data-bs-target="#carouselFade"
           data-bs-slide="prev"
         >
           <span
@@ -56,7 +55,7 @@ const Home = () => {
         <button
           className="carousel-control-next"
           type="button"
-          data-bs-target="#carouselExampleFade"
+          data-bs-target="#carouselFade"
           data-bs-slide="next"
         >
           <span
@@ -66,11 +65,15 @@ const Home = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+
       <div className="container my-5">
+        <center>
+          <h2 className="my-5">Ενδεικτικά Άρθρα</h2>
+        </center>
         <div className="card-group">
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
+          <HomeCard article={articles_info[0]} />
+          <HomeCard article={articles_info[1]} />
+          <HomeCard article={articles_info[2]} />
         </div>
       </div>
       <footer>

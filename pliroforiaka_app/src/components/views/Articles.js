@@ -40,7 +40,7 @@ const Articles = (state) => {
                   className="btn mt-auto hover-dark c-bg-green bottom mybtn"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.1, type: "tween" }}
-                >
+                > 
                   Read more
                 </motion.button>
               </div>
