@@ -19,6 +19,14 @@ const onLoginButtonClick = (validateFn, setLoginError, setCurrentUser, changePag
     }
 }
 
+const toggleActiveClass = (value, classList) => {
+    if (!value) {
+        classList.remove('active')
+    } else {
+        classList.add('active')
+    }
+}
+
 
 const Login = (props) => {
     const { validateUserFn, loginError, setLoginError, setCurrentUser, changePageNameFn } = props
@@ -31,13 +39,18 @@ const Login = (props) => {
             <h2 className="mb-4">Please log in</h2>
             <div className="form-outline mb-4">
                 <input type="text" id="loginUsername" name="loginUsername" className="form-control" onChange={(event) => {
-                    currUsername = event.target.value
+                    const { value, classList } = event.target 
+
+                    currUsername = value
+                    toggleActiveClass(value, classList)
                 }}/>
-                <label className="form-label" htmlFor="loginUsername">Email address</label>
+                <label className="form-label" htmlFor="loginUsername">Username</label>
             </div>
             <div className="form-outline mb-4">
                 <input type="password" id="loginPassword" name="loginPassword" className="form-control" onChange={(event) => {
-                    currPassword = event.target.value
+                    const { value, classList } = event.target 
+                    currPassword = value
+                    toggleActiveClass(value, classList)
                 }}/>
                 <label className="form-label" htmlFor="loginPassword">Password</label>
             </div>
