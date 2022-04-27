@@ -2,9 +2,9 @@ import "./ContactCard.css";
 
 const ContactCard = (props) => {
   return (
-    <div className="container">
-      <div className="card text-white bg-success my-3">
-        <div className="row g-0">
+    <div className="container ">
+      <div className="card text-white  my-3">
+        <div className="row g-0 cardBg">
           <div className="col-md-2">
             <div className="ratio ratio-1x1">
               <img
@@ -22,9 +22,9 @@ const ContactCard = (props) => {
                 <b>MEDIA INQUIRIES</b>
                 <span className="text-muted">
                   <br />
-                  {props.email}
+                  <b>{props.email}</b>
                   <br />
-                  {props.phone}
+                  <b>{props.phone}</b>
                 </span>
               </p>
             </div>
