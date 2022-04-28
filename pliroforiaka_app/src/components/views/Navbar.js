@@ -1,8 +1,56 @@
 import mainLogo from "../../resources/gardenblack.png";
 import SearchBox from "../SearchBox";
 import { useState } from "react";
+
+let changePageName = () => {};
+let logoutUser = () => {};
+
+const UserNotLoggedInButtons = () => {
+    return (<>
+      <li className="nav-item">
+        <button
+          className="btn hover-dark c-bg-green me-2"
+          type="submit"
+          onClick={() => changePageName("Login")}
+        >
+          Συνδεση
+        </button>
+      </li>
+      <li className="nav-item">
+        <button className="btn me-2 hover-dark c-bg-green" type="submit">
+          Εγγραφή
+        </button>
+      </li>
+    </>)
+}
+
+const UserLoggedInButtons = () => {
+  return (<>
+    <li className="nav-item">
+      <button
+        className="btn hover-dark c-bg-green me-2"
+        type="submit"
+        onClick={() => changePageName("Profile")}
+      >
+        Προφιλ
+      </button>
+    </li>
+    <li className="nav-item">
+      <button
+        className="btn hover-dark c-bg-yellow me-2"
+        type="submit"
+        onClick={() => logoutUser()}
+      >
+        Εξοδος
+      </button>
+    </li>
+  </>)
+}
+
 function Navbar(state) {
-  const { changePageNameFn, updateSearchTerm } = state;
+  const { changePageNameFn, updateSearchTerm, isUserLoggedIn, logoutUserFn } = state;
+  changePageName = changePageNameFn
+  logoutUser = logoutUserFn
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light c-bg-white">
@@ -55,7 +103,7 @@ function Navbar(state) {
                 Άρθρα
               </a>
             </li>
-            <SearchBox updateSearchTerm={updateSearchTerm}/>
+            <SearchBox updateSearchTerm={updateSearchTerm} changePageNameFn={changePageName}/>
           </ul>
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -77,20 +125,7 @@ function Navbar(state) {
                 About
               </a>
             </li>
-            <li className="nav-item">
-              <button
-                className="btn hover-dark c-bg-green me-2"
-                type="submit"
-                onClick={() => changePageNameFn("Login")}
-              >
-                Συνδεση
-              </button>
-            </li>
-            <li className="nav-item">
-              <button className="btn me-2 hover-dark c-bg-green" type="submit">
-                Εγγραφή
-              </button>
-            </li>
+            { isUserLoggedIn ? <UserLoggedInButtons /> : <UserNotLoggedInButtons/> }
           </ul>
         </div>
       </div>

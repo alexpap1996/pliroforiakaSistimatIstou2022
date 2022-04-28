@@ -1,7 +1,7 @@
 import React from "react";
 
 const SearchBox = (props) => {
-  const { updateSearchTerm } = props;
+  const { updateSearchTerm, changePageNameFn } = props;
   let currentTerm = ""
   return (
     <form className="d-flex">
@@ -20,6 +20,7 @@ const SearchBox = (props) => {
           className="input-group-text c-bg-green hover-dark hover-cursor"
           id="basic-addon2"
           onClick={(event) => {
+            changePageNameFn('Articles', undefined, false)
             updateSearchTerm(currentTerm);
           }}
         >

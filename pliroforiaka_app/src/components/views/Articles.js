@@ -15,8 +15,8 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
   return Object.values(articles)
     .filter((article) => {
       // console.log(Term, val);
-      if (Term === '') return article;
-      else if (article.article_title.toLowerCase().includes(Term.toLowerCase()))
+      if (!Term) return article;
+      else if (article.title.toLowerCase().includes(Term.toLowerCase()))
         return article;
     })
     .map((article, key) => (
@@ -63,7 +63,7 @@ const Articles = (state) => {
       </div>
       <button
         type="button"
-        className="btn btn-dark mt-5"
+        className="btn btn-dark mx-3 mb-3"
         onClick={() => changePageNameFn("Home")}
       >
         Back To Home Page

@@ -18,7 +18,17 @@ const pageMap = {
 } 
 
 function MainBody(state) {
-  const { pageName, changePageNameFn, validateUserFn, searchTerm, pageData, setLoginErrorFn, loginError, setCurrentUserFn } = state
+  const { 
+    pageName, 
+    changePageNameFn, 
+    validateUserFn,
+    searchTerm,
+    pageData,
+    setLoginErrorFn,
+    loginError,
+    setCurrentUserFn,
+    isUserLoggedIn,
+  } = state
   const PageToReturn = pageMap[pageName]
 
   return (
@@ -31,6 +41,7 @@ function MainBody(state) {
         loginError={loginError}
         searchTerm={searchTerm}
         pageData={pageData}
+        isUserLoggedIn={isUserLoggedIn}
       />
     </>
   );

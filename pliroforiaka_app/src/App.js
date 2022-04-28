@@ -14,6 +14,7 @@ class App extends React.Component {
     searchTerm: "",
     pageData: undefined,
     loginError: undefined,
+    isUserLoggedIn: false,
   };
 
   constructor(props) {
@@ -24,14 +25,19 @@ class App extends React.Component {
     this.updateSearchTerm = this.updateSearchTerm.bind(this)
     this.setLoginError = this.setLoginError.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
+    this.logoutUser = this.logoutUser.bind(this)
   }
 
-  changePageName(pageName, pageData) {
-    this.setState({ pageName, pageData });
+  changePageName(pageName, pageData, wipeSearchTerm = true) {
+    this.setState({ pageName, pageData});
+    if (wipeSearchTerm) {
+      this.setState({searchTerm: undefined})
+    }
   }
 
   validateUser(username, password) {
     const user = users.find((user) => {
+      this.setState({ isUserLoggedIn: true })
       return user.username === username && user.password === password;
     });
     return user;
@@ -49,6 +55,11 @@ class App extends React.Component {
     this.setState({loggedInUser})
   }
 
+  logoutUser (){
+    this.setState({isUserLoggedIn: false})
+    this.changePageName('Home')
+  }
+
   render() {
     return (
       <div className="background-custom">
@@ -58,12 +69,18 @@ class App extends React.Component {
           <link rel="canonical" href="" />
           <meta name="description" content="Helmet application" />
         </Helmet>
-        <Navbar changePageNameFn={this.changePageName} updateSearchTerm={this.updateSearchTerm}/>
+        <Navbar 
+          changePageNameFn={this.changePageName}
+          updateSearchTerm={this.updateSearchTerm}
+          isUserLoggedIn={this.state.isUserLoggedIn}
+          logoutUserFn={this.logoutUser}
+        />
         <MainBody
           pageName={this.state.pageName}
           searchTerm={this.state.searchTerm}
           pageData={this.state.pageData}
           loginError={this.state.loginError}
+          isUserLoggedIn={this.state.isUserLoggedIn}
           changePageNameFn={this.changePageName}
           validateUserFn={this.validateUser}
           setLoginErrorFn={this.setLoginError}
