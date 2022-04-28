@@ -1,3 +1,9 @@
-.homeCard {
-  width: 18rem;
+.myimg {
+  width: 343px;
+  height: 300px;
+}
+
+.myCard {
+  width: 20rem;
+  margin: 30px;
 }

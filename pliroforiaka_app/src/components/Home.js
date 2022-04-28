@@ -1,5 +1,8 @@
 import "./Home.css";
 import HomeCard from "./HomeCard";
+import staticData from "../staticData";
+
+const { articles } = staticData;
 
 const Home = () => {
   return (
@@ -66,9 +69,9 @@ const Home = () => {
       </div>
       <div className="container my-5">
         <div className="card-group">
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
+          <HomeCard article={articles[1]} />
+          <HomeCard article={articles[2]} />
+          <HomeCard article={articles[3]} />
         </div>
       </div>
       <footer>

@@ -1,0 +1,49 @@
+header {
+  padding-top: 60%;
+  font-family: "Sucrose Bold Two";
+  color: #61840d;
+}
+
+.right {
+  position: absolute;
+  right: 100px;
+  width: 200px;
+  padding: 10px;
+}
+
+header img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 45.8%;
+}
+
+header h1 {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-size: 12vw;
+  line-height: 0.8;
+  margin-top: 0;
+  text-align: center;
+}
+
+header h1 span {
+  display: block;
+  font-size: 8.75vw;
+}
+
+main {
+  background: #fcf6e7;
+  position: relative;
+  border: 1px solid #fcf6e7;
+  font-size: 1.4rem;
+  padding: 2rem 25%;
+  line-height: 1.6;
+}
+
+@media all and (max-width: 400px) {
+  main {
+    padding: 2rem;
+  }
+}
