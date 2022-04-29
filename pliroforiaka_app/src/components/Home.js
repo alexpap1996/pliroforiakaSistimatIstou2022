@@ -7,6 +7,9 @@ const { articles } = staticData;
 const Home = () => {
   return (
     <>
+      <form action="/test" method="POST">
+        <button>LoggedIn Test</button>
+      </form>
       <div
         id="carouselExampleFade"
         className="carousel slide carousel-fade carousel-dark"
@@ -74,6 +77,7 @@ const Home = () => {
           <HomeCard article={articles[3]} />
         </div>
       </div>
+
       <footer>
         <div>
           <a href="https://www.youtube.com">

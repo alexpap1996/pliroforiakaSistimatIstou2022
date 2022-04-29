@@ -23,7 +23,7 @@ class User {
         this.articleIds.push(articleId)
     }
 }
-
+ 
 class Article {
     constructor (title, body, imgUrl, authorId, dateCreated, articleId) {
         this.title = title

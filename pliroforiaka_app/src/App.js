@@ -7,7 +7,6 @@ import staticData from "./staticData";
 import { Helmet } from "react-helmet";
 
 const { users, articles } = staticData;
-
 class App extends React.Component {
   state = {
     pageName: "Home",

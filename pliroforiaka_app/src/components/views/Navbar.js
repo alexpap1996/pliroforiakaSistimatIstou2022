@@ -55,7 +55,7 @@ function Navbar(state) {
                 Άρθρα
               </a>
             </li>
-            <SearchBox updateSearchTerm={updateSearchTerm}/>
+            <SearchBox updateSearchTerm={updateSearchTerm} />
           </ul>
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
