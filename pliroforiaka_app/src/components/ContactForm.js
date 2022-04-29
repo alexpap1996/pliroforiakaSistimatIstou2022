@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "./ContactForm.css";
+import "./ContactForm.css";
 import ContactCard from "./ContactCard";
 
 const ContactForm = () => {
@@ -70,7 +70,7 @@ const ContactForm = () => {
               <div className="link">
                 <a href="linkedin.com">
                   <img
-                    class="contactImg"
+                    className="contactImg"
                     src="https://i.postimg.cc/m2mg2Hjm/linkedin.png"
                     alt="linkedin"
                   />
@@ -79,7 +79,7 @@ const ContactForm = () => {
               <div className="link">
                 <a href="https://github.com/alexpap1996/pliroforiakaSistimatIstou2022">
                   <img
-                    class="contactImg"
+                    className="contactImg"
                     src="https://i.postimg.cc/YCV2QBJg/github.png"
                     alt="github"
                   />
@@ -97,7 +97,7 @@ const ContactForm = () => {
               <div className="link">
                 <a href="gmail.com">
                   <img
-                    class="contactImg"
+                    className="contactImg"
                     src="https://i.postimg.cc/NjLfyjPB/email.png"
                     alt="email"
                   />
@@ -105,7 +105,7 @@ const ContactForm = () => {
               </div>
             </div>
           </div>
-          <div className="contact-form-wrapper">
+          <div className="form-body contact-form-wrapper">
             <form onSubmit={handleSubmit}>
               <div className="form-item my-3">
                 <input type="text" name="name" id="name" required />

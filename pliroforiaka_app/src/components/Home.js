@@ -1,7 +1,11 @@
 import "./Home.css";
 import HomeCard from "./HomeCard";
+import staticData from "../staticData";
 
-const Home = () => {
+const { articles } = staticData;
+
+const Home = (state) => {
+  const { changePageNameFn } = state;
   return (
     <>
       <div
@@ -66,9 +70,9 @@ const Home = () => {
       </div>
       <div className="container my-5">
         <div className="card-group">
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
+          <HomeCard article={articles[1]} changePageNameFn={changePageNameFn}/>
+          <HomeCard article={articles[2]} changePageNameFn/>
+          <HomeCard article={articles[3]} changePageNameFn/>
         </div>
       </div>
       <footer>

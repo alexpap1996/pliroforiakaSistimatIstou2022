@@ -1,13 +1,24 @@
+const articles_info = require("./components/siteInfoNode");
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
-app.use("/", router);
-app.listen(5000, () => console.log("Server Running"));
+
+app.get("/articles/:id", (req, res) => {
+  const { id } = req.params;
+  return res.send(id);
+  // for (let article of articles_info) {
+  //   if (article.id === id) {
+  //     res.render("show",{article});
+  //   }
+  // }
+  // res.redirect("./components/views/ErrorPage.js");
+});
 
 const contactEmail = nodemailer.createTransport({
   service: "gmail",
@@ -45,7 +56,4 @@ router.post("/contact", (req, res) => {
   });
 });
 
-app.get("articles/:articleId", (req, res) => {
-  const { articlesId } = req.params;
-  res.render(articlesId);
-});
+app.listen(5000, () => console.log("Server Running"));
