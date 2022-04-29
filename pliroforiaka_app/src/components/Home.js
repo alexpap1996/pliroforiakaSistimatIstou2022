@@ -71,12 +71,12 @@ const Home = (state) => {
       <div className="container my-5">
         <div className="card-group">
           <HomeCard article={articles[1]} changePageNameFn={changePageNameFn}/>
-          <HomeCard article={articles[2]} changePageNameFn/>
-          <HomeCard article={articles[3]} changePageNameFn/>
+          <HomeCard article={articles[2]} changePageNameFn={changePageNameFn}/>
+          <HomeCard article={articles[3]} changePageNameFn={changePageNameFn}/>
         </div>
       </div>
       <footer>
-        <div>
+        <div className="footer-content-container">
           <a href="https://www.youtube.com">
             <img
               border="0"

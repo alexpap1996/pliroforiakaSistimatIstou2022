@@ -21,11 +21,13 @@ header img {
 header h1 {
   position: fixed;
   top: 2rem;
-  right: 2rem;
-  font-size: 12vw;
+  font-size: 10vw;
   line-height: 0.8;
   margin-top: 0;
+  padding-left: 15vw;
+  padding-right: 15vw;
   text-align: center;
+  -webkit-text-stroke: 1px white;
 }
 
 header h1 span {

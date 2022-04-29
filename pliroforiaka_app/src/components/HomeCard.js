@@ -12,7 +12,7 @@ const HomeCard = (props) => {
       />
       <div className="card-body d-flex flex-column">
         <h5 className="card-title">{props.article.title}</h5>
-        <p className="card-text">{props.article.body}</p>
+        <p className="card-text">{props.article.articleDescription}</p>
         <motion.button
           className="btn mt-auto hover-dark c-bg-green bottom mybtn"
           whileHover={{ scale: 1.05 }}
