@@ -6,6 +6,7 @@ import Articles from "./views/Articles";
 import CommunicationPage from "./views/CommunicationPage";
 import Login from "./views/Login";
 import Article from "./views/Article";
+import Signup from "./views/Signup";
 
 const pageMap = {
   'Home': HomePage,
@@ -15,6 +16,7 @@ const pageMap = {
   'CommunicationPage': CommunicationPage,
   'Login': Login,
   'Article': Article,
+  'Signup': Signup,
 } 
 
 function MainBody(state) {

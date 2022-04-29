@@ -17,7 +17,9 @@ const UserNotLoggedInButtons = () => {
         </button>
       </li>
       <li className="nav-item">
-        <button className="btn me-2 hover-dark c-bg-green" type="submit">
+        <button className="btn me-2 hover-dark c-bg-green" type="submit"
+          onClick={() => changePageName("Signup")}
+        >
           Εγγραφή
         </button>
       </li>
