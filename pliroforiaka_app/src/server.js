@@ -1,4 +1,3 @@
-const articles_info = require("./components/siteInfoNode");
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
