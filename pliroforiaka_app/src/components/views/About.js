@@ -28,7 +28,6 @@ const About = () => {
         >
           {aboutText}
         </motion.div>
-        {/* <SearchBox /> */}
         <br />
         <div className="profiles">
           {developerInfo.map((developerInfo, index) => (

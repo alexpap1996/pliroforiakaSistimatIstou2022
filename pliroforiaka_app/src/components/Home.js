@@ -4,7 +4,8 @@ import staticData from "../staticData";
 
 const { articles } = staticData;
 
-const Home = () => {
+const Home = (state) => {
+  const { changePageNameFn } = state;
   return (
     <>
       <div
@@ -69,9 +70,9 @@ const Home = () => {
       </div>
       <div className="container my-5">
         <div className="card-group">
-          <HomeCard article={articles[1]} />
-          <HomeCard article={articles[2]} />
-          <HomeCard article={articles[3]} />
+          <HomeCard article={articles[1]} changePageNameFn={changePageNameFn}/>
+          <HomeCard article={articles[2]} changePageNameFn/>
+          <HomeCard article={articles[3]} changePageNameFn/>
         </div>
       </div>
       <footer>
