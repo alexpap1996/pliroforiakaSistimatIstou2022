@@ -28,10 +28,7 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
         />
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">{article.title}</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up
-            the bulk of the card's content.
-          </p>
+          <p className="card-text">{article.articleDescription}</p>
           <motion.button
             className="btn mt-auto hover-dark c-bg-green bottom mybtn"
             whileHover={{ scale: 1.05 }}
