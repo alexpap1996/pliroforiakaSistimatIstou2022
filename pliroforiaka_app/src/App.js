@@ -14,6 +14,7 @@ class App extends React.Component {
     searchTerm: "",
     pageData: undefined,
     loginError: undefined,
+    signupError: undefined,
     isUserLoggedIn: false,
   };
 
@@ -24,6 +25,7 @@ class App extends React.Component {
     this.validateUser = this.validateUser.bind(this);
     this.updateSearchTerm = this.updateSearchTerm.bind(this)
     this.setLoginError = this.setLoginError.bind(this)
+    this.setSignupError = this.setSignupError.bind(this)
     this.setCurrentUser = this.setCurrentUser.bind(this)
     this.logoutUser = this.logoutUser.bind(this)
   }
@@ -49,6 +51,10 @@ class App extends React.Component {
 
   setLoginError (loginError) {
     this.setState({loginError})
+  }
+
+  setSignupError (signupError) {
+    this.setState({signupError})
   }
 
   setCurrentUser (loggedInUser) {
@@ -80,10 +86,12 @@ class App extends React.Component {
           searchTerm={this.state.searchTerm}
           pageData={this.state.pageData}
           loginError={this.state.loginError}
+          signupError={this.state.signupError}
           isUserLoggedIn={this.state.isUserLoggedIn}
           changePageNameFn={this.changePageName}
           validateUserFn={this.validateUser}
           setLoginErrorFn={this.setLoginError}
+          setSignupErrorFn={this.setSignupError}
           setCurrentUserFn={this.setCurrentUser}
         />
       </div>

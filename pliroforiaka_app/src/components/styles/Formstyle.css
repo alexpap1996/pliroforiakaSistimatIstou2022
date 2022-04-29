@@ -10,6 +10,14 @@ html {
     text-align: center !important;
 }
 
+.medium-form {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center !important;
+}
+
 .form-outline {
     position: relative;
 }

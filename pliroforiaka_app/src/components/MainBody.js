@@ -27,7 +27,9 @@ function MainBody(state) {
     searchTerm,
     pageData,
     setLoginErrorFn,
+    setSignupErrorFn,
     loginError,
+    signupError,
     setCurrentUserFn,
     isUserLoggedIn,
   } = state
@@ -39,8 +41,10 @@ function MainBody(state) {
         changePageNameFn={changePageNameFn}
         validateUserFn={validateUserFn}
         setLoginError={setLoginErrorFn}
+        setSignupError={setSignupErrorFn}
         setCurrentUser={setCurrentUserFn}
         loginError={loginError}
+        signupError={signupError}
         searchTerm={searchTerm}
         pageData={pageData}
         isUserLoggedIn={isUserLoggedIn}
