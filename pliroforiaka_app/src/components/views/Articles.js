@@ -1,20 +1,22 @@
 import { motion } from "framer-motion";
 import "../styles/Articles.css";
 import "../styles/ErrorPage.css";
-import { articles_info } from "../siteInfo";
 import staticData from "../../staticData"
 
 const { articles } = staticData
 
-
-const displayingResultsText = (searchTerm) => {
-  return <span className="d-flex justify-content-center">Displaying results for: "{searchTerm}"</span>
+const displayingResultsText = (searchTerm, numOfArticles) => {
+  return (
+    <div className="d-flex flex-column align-items-center">
+      <span className="">Displaying results for: "{searchTerm}"</span>
+      <span>{numOfArticles} articles found</span>
+    </div>
+  )
 }
 
 const getFilteredArticles = (articles, Term, changePageNameFn) => {
   return Object.values(articles)
     .filter((article) => {
-      // console.log(Term, val);
       if (!Term) return article;
       else if (article.title.toLowerCase().includes(Term.toLowerCase()))
         return article;
@@ -54,7 +56,7 @@ const Articles = (state) => {
   return (
     <>
       <span className="title">Articles</span>
-      {searchTerm && displayingResultsText(searchTerm)}
+      {searchTerm && displayingResultsText(searchTerm, filteredArticles.length)}
       <div className="container article-container">
         {filteredArticles}
       </div>
