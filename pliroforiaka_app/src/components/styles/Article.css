@@ -44,11 +44,9 @@ main {
   line-height: 1.6;
 }
 
-.date{
+.date {
   margin-left: -15%;
-
 }
-
 
 @media all and (max-width: 400px) {
   main {

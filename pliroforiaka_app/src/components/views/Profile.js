@@ -16,7 +16,7 @@ const Profile = (state) => {
               <div className="card-header">Φωτογραφία Προφίλ</div>
               <div className="card-body text-center">
                 <img
-                  className="img-account-profile rounded-circle mb-2"
+                  className="profileImg rounded-circle mb-2"
                   src="https://i.ytimg.com/vi/sICbEUfSljs/hqdefault.jpg"
                   alt=""
                 />
@@ -35,10 +35,10 @@ const Profile = (state) => {
               <div className="card-body">
                 <form>
                   <div className="mb-3">
-                    <label className="small mb-1" for="inputUsername"></label>
+                    <label className="small mb-1" for="username"></label>
                     <input
                       className="form-control"
-                      id="inputUsername"
+                      id="username"
                       type="text"
                       placeholder="Όνομα χρήστη..."
                     />
@@ -47,20 +47,20 @@ const Profile = (state) => {
                     <div className="col-md-6">
                       <label
                         className="small mb-1"
-                        for="inputFirstName"
+                        for="firstName"
                       ></label>
                       <input
                         className="form-control"
-                        id="inputFirstName"
+                        id="firstName"
                         type="text"
                         placeholder="Όνομα..."
                       />
                     </div>
                     <div className="col-md-6">
-                      <label className="small mb-1" for="inputLastName"></label>
+                      <label className="small mb-1" for="lastName"></label>
                       <input
                         className="form-control"
-                        id="inputLastName"
+                        id="lastName"
                         type="text"
                         placeholder="Επώνυμο..."
                       />
@@ -69,13 +69,13 @@ const Profile = (state) => {
                   <div className="mb-3">
                     <label
                       className="small mb-1"
-                      for="inputEmailAddress"
+                      for="email"
                     ></label>
                     <input
                       className="form-control"
-                      id="inputEmailAddress"
+                      id="email"
                       type="email"
-                      placeholder="διεύθυνση email..."
+                      placeholder="Διεύθυνση email..."
                     />
                   </div>
                   <button className="btn btn-primary" type="button">
