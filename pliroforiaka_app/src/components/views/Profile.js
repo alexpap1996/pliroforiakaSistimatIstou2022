@@ -1,4 +1,5 @@
 import "../styles/Profile.css";
+import anon from "../../resources/anon.PNG"
 
 const Profile = (state) => {
   return (
@@ -17,7 +18,7 @@ const Profile = (state) => {
               <div className="card-body text-center">
                 <img
                   className="profileImg rounded-circle mb-2"
-                  src="https://i.ytimg.com/vi/sICbEUfSljs/hqdefault.jpg"
+                  src={anon}
                   alt=""
                 />
                 <div className="small font-italic text-muted mb-4">
@@ -34,7 +35,7 @@ const Profile = (state) => {
               <div className="card-header">Λεπτομέριες Λογαριασμού</div>
               <div className="card-body">
                 <form>
-                  <div className="mb-3">
+                  <div className="mb-3 p-form-control-wrapper">
                     <label className="small mb-1" for="username"></label>
                     <input
                       className="form-control"
@@ -44,7 +45,7 @@ const Profile = (state) => {
                     />
                   </div>
                   <div className="row gx-3 mb-3">
-                    <div className="col-md-6">
+                    <div className="col-md-6 p-form-control-wrapper">
                       <label
                         className="small mb-1"
                         for="firstName"
@@ -56,7 +57,7 @@ const Profile = (state) => {
                         placeholder="Όνομα..."
                       />
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6 p-form-control-wrapper">
                       <label className="small mb-1" for="lastName"></label>
                       <input
                         className="form-control"
@@ -66,7 +67,7 @@ const Profile = (state) => {
                       />
                     </div>
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 p-form-control-wrapper">
                     <label
                       className="small mb-1"
                       for="email"
