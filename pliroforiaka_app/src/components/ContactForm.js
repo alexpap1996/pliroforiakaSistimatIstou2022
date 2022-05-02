@@ -109,11 +109,15 @@ const ContactForm = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-item my-3">
                 <input type="text" name="name" id="name" required />
-                <label htmlFor="name">Όνομα:</label>
+                <label className="label-item" htmlFor="name">
+                  Όνομα:
+                </label>
               </div>
               <div className="form-item my-3">
                 <input type="text" name="email" id="email" required />
-                <label htmlFor="email">Email:</label>
+                <label className="label-item" htmlFor="email">
+                  Email:
+                </label>
               </div>
               <div className="form-item">
                 <textarea
@@ -122,7 +126,9 @@ const ContactForm = () => {
                   id="message"
                   required
                 ></textarea>
-                <label htmlFor="message">Μήνυμα:</label>
+                <label className="label-item" htmlFor="message">
+                  Μήνυμα:
+                </label>
               </div>
               <button className="submit-btn" type="submit">
                 {status}
