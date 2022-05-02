@@ -1,4 +1,4 @@
-import "../styles/Article.css";
+import "../styles/article.css";
 import { motion } from "framer-motion";
 
 const Article = (state) => {
