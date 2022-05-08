@@ -7,8 +7,8 @@ const { articles } = staticData;
 const Home = () => {
   return (
     <>
-      <form action="/test" method="POST">
-        <button>LoggedIn Test</button>
+      <form action="/testLogin" method="POST">
+        <button>testLogin</button>
       </form>
       <div
         id="carouselExampleFade"

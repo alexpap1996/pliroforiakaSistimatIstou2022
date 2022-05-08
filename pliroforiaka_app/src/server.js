@@ -8,7 +8,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("../models/user");
 const MongoDBStore = require("connect-mongo");
-const { isLoggedIn } = require("./auth");
+const { isLoggedIn, isAdmin } = require("./auth");
 
 //connect to DB
 mongoose.connect("mongodb://localhost:27017/makeItGreen", {
@@ -63,19 +63,12 @@ passport.deserializeUser(User.deserializeUser());
 //middleware
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
-  console.log("middleware user = ", req.user);
   next();
 });
 
 //routes
-
-app.post("/test", isLoggedIn, (req, res) => {
-  res.send("in test");
-});
-
-app.get("/articles/:id", (req, res) => {
-  const { id } = req.params;
-  return res.send(id);
+app.post("/testLogin", isLoggedIn, (req, res) => {
+  res.send("You are logged in");
 });
 
 app.post(

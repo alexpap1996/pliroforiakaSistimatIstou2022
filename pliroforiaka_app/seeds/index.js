@@ -19,11 +19,12 @@ const seedDb = async () => {
   await User.deleteMany({});
   await Article.deleteMany({});
   for (let i = 0, j = 0; i < users.length; i++) {
-    const { username, firstName, lastName, role, password } = users[i];
+    const { username, firstName, lastName, email, role, password } = users[i];
     const user = new User({
       username,
       firstName,
       lastName,
+      email,
       role,
     });
     const newUser = await User.register(user, password);
