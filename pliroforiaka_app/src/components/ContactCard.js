@@ -20,7 +20,7 @@ const ContactCard = (props) => {
               <p className="card-text">{props.text}</p>
               <p className="card-text">
                 <b>MEDIA INQUIRIES</b>
-                <span className="text-muted">
+                <span>
                   <br />
                   <b>{props.email}</b>
                   <br />

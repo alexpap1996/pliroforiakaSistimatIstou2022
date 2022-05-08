@@ -7,7 +7,7 @@ import CommunicationPage from "./views/CommunicationPage";
 import Login from "./views/Login";
 import Article from "./views/Article";
 import Signup from "./views/Signup";
-import Profile from "./views/Profile"
+import Profile from "./views/Profile";
 
 const pageMap = {
   'Home': HomePage,
@@ -29,7 +29,9 @@ function MainBody(state) {
     searchTerm,
     pageData,
     setLoginErrorFn,
+    setSignupErrorFn,
     loginError,
+    signupError,
     setCurrentUserFn,
     isUserLoggedIn,
   } = state
@@ -41,8 +43,10 @@ function MainBody(state) {
         changePageNameFn={changePageNameFn}
         validateUserFn={validateUserFn}
         setLoginError={setLoginErrorFn}
+        setSignupError={setSignupErrorFn}
         setCurrentUser={setCurrentUserFn}
         loginError={loginError}
+        signupError={signupError}
         searchTerm={searchTerm}
         pageData={pageData}
         isUserLoggedIn={isUserLoggedIn}
