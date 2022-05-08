@@ -15,8 +15,8 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
   return Object.values(articles)
     .filter((article) => {
       // console.log(Term, val);
-      if (Term === '') return article;
-      else if (article.article_title.toLowerCase().includes(Term.toLowerCase()))
+      if (!Term) return article;
+      else if (article.title.toLowerCase().includes(Term.toLowerCase()))
         return article;
     })
     .map((article, key) => (
@@ -28,10 +28,7 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
         />
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">{article.title}</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up
-            the bulk of the card's content.
-          </p>
+          <p className="card-text">{article.articleDescription}</p>
           <motion.button
             className="btn mt-auto hover-dark c-bg-green bottom mybtn"
             whileHover={{ scale: 1.05 }}
@@ -63,7 +60,7 @@ const Articles = (state) => {
       </div>
       <button
         type="button"
-        className="btn btn-dark mt-5"
+        className="btn btn-dark mx-3 mb-3"
         onClick={() => changePageNameFn("Home")}
       >
         Back To Home Page

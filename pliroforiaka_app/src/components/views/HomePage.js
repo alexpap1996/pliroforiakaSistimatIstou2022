@@ -1,9 +1,10 @@
 import Home from "../Home";
 
 function HomePage(state) {
+  const { changePageNameFn } = state
   return (
     <div>
-      <Home />
+      <Home changePageNameFn={changePageNameFn}/>
     </div>
   );
 }

@@ -6,6 +6,8 @@ import Articles from "./views/Articles";
 import CommunicationPage from "./views/CommunicationPage";
 import Login from "./views/Login";
 import Article from "./views/Article";
+import Signup from "./views/Signup";
+import Profile from "./views/Profile"
 
 const pageMap = {
   'Home': HomePage,
@@ -15,10 +17,22 @@ const pageMap = {
   'CommunicationPage': CommunicationPage,
   'Login': Login,
   'Article': Article,
+  'Signup': Signup,
+  'Profile': Profile,
 } 
 
 function MainBody(state) {
-  const { pageName, changePageNameFn, validateUserFn, searchTerm, pageData, setLoginErrorFn, loginError, setCurrentUserFn } = state
+  const { 
+    pageName, 
+    changePageNameFn, 
+    validateUserFn,
+    searchTerm,
+    pageData,
+    setLoginErrorFn,
+    loginError,
+    setCurrentUserFn,
+    isUserLoggedIn,
+  } = state
   const PageToReturn = pageMap[pageName]
 
   return (
@@ -31,6 +45,7 @@ function MainBody(state) {
         loginError={loginError}
         searchTerm={searchTerm}
         pageData={pageData}
+        isUserLoggedIn={isUserLoggedIn}
       />
     </>
   );

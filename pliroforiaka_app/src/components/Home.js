@@ -4,7 +4,8 @@ import staticData from "../staticData";
 
 const { articles } = staticData;
 
-const Home = () => {
+const Home = (state) => {
+  const { changePageNameFn } = state;
   return (
     <>
       <form action="/testLogin" method="POST">
@@ -72,14 +73,14 @@ const Home = () => {
       </div>
       <div className="container my-5">
         <div className="card-group">
-          <HomeCard article={articles[1]} />
-          <HomeCard article={articles[2]} />
-          <HomeCard article={articles[3]} />
+          <HomeCard article={articles[1]} changePageNameFn={changePageNameFn}/>
+          <HomeCard article={articles[2]} changePageNameFn={changePageNameFn}/>
+          <HomeCard article={articles[3]} changePageNameFn={changePageNameFn}/>
         </div>
       </div>
 
       <footer>
-        <div>
+        <div className="footer-content-container">
           <a href="https://www.youtube.com">
             <img
               border="0"
