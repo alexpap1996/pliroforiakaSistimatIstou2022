@@ -11,6 +11,17 @@ const Home = (state) => {
       <form action="/testLogin" method="POST">
         <button>testLogin</button>
       </form>
+      <form action="/deleteUser/:id?_method=DELETE" method="POST">
+        <button>Delete User</button>
+      </form>
+      <form action="/editUser/:id?_method=PATCH" method="POST">
+        <h3>Edit User</h3>
+        <input name="username" type="text" placeholder="Όνομα χρήστη..." />
+        <input name="firstName" type="text" placeholder="Όνομα..." />
+        <input name="lastName" type="text" placeholder="Επώνυμο..." />
+        <input name="email" type="email" placeholder="Διεύθυνση email..." />
+        <button>Edit User</button>
+      </form>
       <div
         id="carouselExampleFade"
         className="carousel slide carousel-fade carousel-dark"
@@ -73,9 +84,9 @@ const Home = (state) => {
       </div>
       <div className="container my-5">
         <div className="card-group">
-          <HomeCard article={articles[1]} changePageNameFn={changePageNameFn}/>
-          <HomeCard article={articles[2]} changePageNameFn={changePageNameFn}/>
-          <HomeCard article={articles[3]} changePageNameFn={changePageNameFn}/>
+          <HomeCard article={articles[1]} changePageNameFn={changePageNameFn} />
+          <HomeCard article={articles[2]} changePageNameFn={changePageNameFn} />
+          <HomeCard article={articles[3]} changePageNameFn={changePageNameFn} />
         </div>
       </div>
 

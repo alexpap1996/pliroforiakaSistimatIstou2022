@@ -8,7 +8,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("../models/user");
 const MongoDBStore = require("connect-mongo");
-const { isLoggedIn, isAdmin } = require("./auth");
+const { isLoggedIn, isAuthor } = require("./auth");
+const methodOverride = require("method-override");
 
 //connect to DB
 mongoose.connect("mongodb://localhost:27017/makeItGreen", {
@@ -55,6 +56,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride("_method"));
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -76,10 +78,42 @@ app.post(
   passport.authenticate("local", { failureRedirect: "/login" }),
   (req, res) => {
     console.log("LOGGED IN SUCCESFULLY");
-    console.log("currentUser = ", req.user._id);
-    res.redirect("/");
+    res.redirect(`/${req.user._id}`);
   }
 );
+
+app.post("/register", async (req, res) => {
+  try {
+    const { email, username, firstName, lastName, password } = req.body;
+    const user = new User({
+      email,
+      username,
+      firstName,
+      lastName,
+    });
+    await User.register(user, password);
+    console.log("Account Created!");
+    res.redirect("/home");
+  } catch (e) {
+    console.log("Username already in use or not all fields are populated");
+    res.redirect("/register");
+  }
+});
+
+app.delete("/deleteUser/:id", async (req, res) => {
+  const user = await User.findOne({ role: "user" }); //need to get the actual id
+  console.log("User to be deleted = ", user);
+  await User.findByIdAndDelete(user._id);
+  return res.redirect("/home");
+});
+
+app.patch("/editUser/:id", async (req, res) => {
+  const user = await User.findOne({ role: "user" }); //need to get the actual id
+  console.log("User to be edited = ", user);
+  const editedUser = await User.findByIdAndUpdate(user._id, { ...req.body });
+  await editedUser.save();
+  return res.redirect("/home");
+});
 
 const contactEmail = nodemailer.createTransport({
   service: "gmail",

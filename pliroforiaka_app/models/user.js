@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
-const validator = require('validator');
+const validator = require("validator");
 
 const UserSchema = new Schema({
   firstName: {
@@ -15,13 +15,17 @@ const UserSchema = new Schema({
   role: {
     type: String,
     enum: ["admin", "user"],
+    default: "user",
     required: true,
   },
   email: {
     type: String,
     required: true,
-    validate: [validator.isEmail, 'invalid email']
-  }
+    validate: [validator.isEmail, "invalid email"],
+  },
+  avatar: {
+    type: String,
+  },
 });
 
 UserSchema.plugin(passportLocalMongoose);
