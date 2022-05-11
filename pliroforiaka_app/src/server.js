@@ -90,22 +90,24 @@ app.post(
 );
 
 app.post("/register", upload.single("file"), async (req, res) => {
-  const { email, username, firstName, lastName, password } = req.body;
-  console.log("body = ", req.body);
-  const user = new User({
-    email,
-    username,
-    firstName,
-    lastName,
-  });
-  console.log("before");
-  user.image = { url: req.file.path, filename: req.file.filename };
-  console.log("after");
-  await User.register(user, password);
-  await user.save();
-  console.log(user);
-  console.log("Account Created!");
-  res.redirect("/home");
+  try {
+    const { email, username, firstName, lastName, password } = req.body;
+    const user = new User({
+      email,
+      username,
+      firstName,
+      lastName,
+    });
+    user.image = { url: req.file.path, filename: req.file.filename };
+    await User.register(user, password);
+    await user.save();
+    console.log("Account Created!");
+    console.log(user);
+    return res.redirect("/home");
+  } catch (e) {
+    console.log("Error");
+    return res.redirect("/register");
+  }
 });
 
 app.delete("/deleteUser/:id", async (req, res) => {

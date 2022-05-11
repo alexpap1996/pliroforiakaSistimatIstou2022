@@ -27,8 +27,8 @@ const seedDb = async () => {
       email,
       role,
       image: {
-        url: "https://res.cloudinary.com/dgzlym20q/image/upload/v1652174183/makeItGreen/Jim_sk0rvd.jpg",
-        filename: "makeItGreen/Jim_sk0rvd",
+        url: users[i].image.url,
+        filename: users[i].image.filename,
       },
     });
     const newUser = await User.register(user, password);
@@ -42,8 +42,8 @@ const seedDb = async () => {
         description,
         author: newUser._id,
         image: {
-          url: "https://res.cloudinary.com/dgzlym20q/image/upload/v1652174180/makeItGreen/bitcoin_maybz6.jpg",
-          filename: "makeItGreen/bitcoin_maybz6",
+          url: articles[j].image.url,
+          filename: articles[j].image.filename,
         },
       });
       await article.save();
@@ -57,8 +57,8 @@ const seedDb = async () => {
           description: articles[j].description,
           author: newUser._id,
           image: {
-            url: "https://res.cloudinary.com/dgzlym20q/image/upload/v1652174176/makeItGreen/solar-energy_dd7zrh.png",
-            filename: "makeItGreen/solar-energy_dd7zrh",
+            url: articles[j].image.url,
+            filename: articles[j].image.filename,
           },
         });
         await article1.save();

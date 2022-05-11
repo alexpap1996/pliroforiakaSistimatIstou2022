@@ -69,6 +69,7 @@ const Signup = (props) => {
   } = props;
 
   const send = (e) => {
+    e.preventDefault();
     const data = new FormData();
     data.append("username", username);
     data.append("firstName", firstName);
@@ -80,6 +81,7 @@ const Signup = (props) => {
     Axios.post("http://localhost:3000/register", data)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
+    changePageNameFn("Home");
   };
 
   return (
@@ -92,7 +94,7 @@ const Signup = (props) => {
           height="72"
           alt="main logo"
         ></img>
-        <form action="">
+        <form action="#">
           <h2 className="mb-4">Create User</h2>
           <div className="form-outline mb-4">
             <input
