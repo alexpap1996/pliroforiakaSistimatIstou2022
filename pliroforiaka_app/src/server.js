@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
@@ -10,6 +14,9 @@ const User = require("../models/user");
 const MongoDBStore = require("connect-mongo");
 const { isLoggedIn, isAuthor } = require("./auth");
 const methodOverride = require("method-override");
+const { storage } = require("./ImageHosting");
+const multer = require("multer");
+const upload = multer({ storage, limits: { fieldSize: 5 * 1024 * 1024 } }); //5MB limit
 
 //connect to DB
 mongoose.connect("mongodb://localhost:27017/makeItGreen", {
@@ -82,22 +89,23 @@ app.post(
   }
 );
 
-app.post("/register", async (req, res) => {
-  try {
-    const { email, username, firstName, lastName, password } = req.body;
-    const user = new User({
-      email,
-      username,
-      firstName,
-      lastName,
-    });
-    await User.register(user, password);
-    console.log("Account Created!");
-    res.redirect("/home");
-  } catch (e) {
-    console.log("Username already in use or not all fields are populated");
-    res.redirect("/register");
-  }
+app.post("/register", upload.single("file"), async (req, res) => {
+  const { email, username, firstName, lastName, password } = req.body;
+  console.log("body = ", req.body);
+  const user = new User({
+    email,
+    username,
+    firstName,
+    lastName,
+  });
+  console.log("before");
+  user.image = { url: req.file.path, filename: req.file.filename };
+  console.log("after");
+  await User.register(user, password);
+  await user.save();
+  console.log(user);
+  console.log("Account Created!");
+  res.redirect("/home");
 });
 
 app.delete("/deleteUser/:id", async (req, res) => {
@@ -110,11 +118,18 @@ app.delete("/deleteUser/:id", async (req, res) => {
 app.patch("/editUser/:id", async (req, res) => {
   const user = await User.findOne({ role: "user" }); //need to get the actual id
   console.log("User to be edited = ", user);
-  const editedUser = await User.findByIdAndUpdate(user._id, { ...req.body });
+  const { username, firstName, lastName, email } = req.body;
+  const editedUser = await User.findByIdAndUpdate(user._id, {
+    username,
+    firstName,
+    lastName,
+    email,
+  });
   await editedUser.save();
   return res.redirect("/home");
 });
 
+//contact form reciever mail
 const contactEmail = nodemailer.createTransport({
   service: "gmail",
   auth: {

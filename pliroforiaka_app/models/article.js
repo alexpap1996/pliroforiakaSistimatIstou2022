@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
 const ArticleSchema = new Schema({
   title: {
     type: String,
@@ -10,9 +15,8 @@ const ArticleSchema = new Schema({
     type: String,
     required: true,
   },
-  imgUrl: {
-    type: String,
-    required: true,
+  image: {
+    type: ImageSchema,
   },
   created: {
     type: Date,

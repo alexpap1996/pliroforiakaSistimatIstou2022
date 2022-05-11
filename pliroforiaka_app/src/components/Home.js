@@ -8,6 +8,7 @@ const Home = (state) => {
   const { changePageNameFn } = state;
   return (
     <>
+    {/* test forms start*/}
       <form action="/testLogin" method="POST">
         <button>testLogin</button>
       </form>
@@ -20,8 +21,17 @@ const Home = (state) => {
         <input name="firstName" type="text" placeholder="Όνομα..." />
         <input name="lastName" type="text" placeholder="Επώνυμο..." />
         <input name="email" type="email" placeholder="Διεύθυνση email..." />
+        <input type="file" id="image" name="image"/>
         <button>Edit User</button>
       </form>
+      <form action="/editArticle/:id?_method=PATCH" method="POST">
+        <h3>Edit Article</h3>
+        <input name="title" type="text" placeholder="title..." />
+        <input name="body" type="text" placeholder="body..." />
+        <input name="description" type="text" placeholder="description..." />
+        <input type="file" id="image" name="image"/>
+      </form>
+      {/* test forms end */}
       <div
         id="carouselExampleFade"
         className="carousel slide carousel-fade carousel-dark"

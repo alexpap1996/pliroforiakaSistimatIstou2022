@@ -26,30 +26,40 @@ const seedDb = async () => {
       lastName,
       email,
       role,
+      image: {
+        url: "https://res.cloudinary.com/dgzlym20q/image/upload/v1652174183/makeItGreen/Jim_sk0rvd.jpg",
+        filename: "makeItGreen/Jim_sk0rvd",
+      },
     });
     const newUser = await User.register(user, password);
     console.log(newUser);
     if (articles[j] && newUser.role === "user") {
-      const { title, body, imgUrl, created, description } = articles[j];
+      const { title, body, created, description } = articles[j];
       const article = new Article({
         title,
         body,
-        imgUrl,
         created,
         description,
         author: newUser._id,
+        image: {
+          url: "https://res.cloudinary.com/dgzlym20q/image/upload/v1652174180/makeItGreen/bitcoin_maybz6.jpg",
+          filename: "makeItGreen/bitcoin_maybz6",
+        },
       });
       await article.save();
       console.log(article);
       j++;
       if (articles[j]) {
         const article1 = new Article({
-          title:  articles[j].title,
-          body:  articles[j].body,
-          imgUrl:  articles[j].imgUrl,
-          created:  articles[j].created,
-          description:  articles[j].description,
+          title: articles[j].title,
+          body: articles[j].body,
+          created: articles[j].created,
+          description: articles[j].description,
           author: newUser._id,
+          image: {
+            url: "https://res.cloudinary.com/dgzlym20q/image/upload/v1652174176/makeItGreen/solar-energy_dd7zrh.png",
+            filename: "makeItGreen/solar-energy_dd7zrh",
+          },
         });
         await article1.save();
         console.log(article1);

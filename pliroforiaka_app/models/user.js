@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 const validator = require("validator");
 
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
 const UserSchema = new Schema({
   firstName: {
     type: String,
@@ -23,8 +28,8 @@ const UserSchema = new Schema({
     required: true,
     validate: [validator.isEmail, "invalid email"],
   },
-  avatar: {
-    type: String,
+  image: {
+    type: ImageSchema,
   },
 });
 
