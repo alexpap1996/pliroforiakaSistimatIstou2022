@@ -14,7 +14,7 @@ const User = require("../models/user");
 const MongoDBStore = require("connect-mongo");
 const { isLoggedIn, isAuthor } = require("./auth");
 const methodOverride = require("method-override");
-const { storage } = require("./ImageHosting");
+const { storage, cloudinary } = require("./ImageHosting");
 const multer = require("multer");
 const upload = multer({ storage, limits: { fieldSize: 5 * 1024 * 1024 } }); //5MB limit
 
@@ -85,11 +85,11 @@ app.post(
   passport.authenticate("local", { failureRedirect: "/login" }),
   (req, res) => {
     console.log("LOGGED IN SUCCESFULLY");
-    res.redirect(`/${req.user._id}`);
+    res.redirect(`home`);
   }
 );
 
-app.post("/register", upload.single("file"), async (req, res) => {
+app.post("/registerUser", upload.single("file"), async (req, res) => {
   try {
     const { email, username, firstName, lastName, password } = req.body;
     const user = new User({
@@ -101,34 +101,44 @@ app.post("/register", upload.single("file"), async (req, res) => {
     user.image = { url: req.file.path, filename: req.file.filename };
     await User.register(user, password);
     await user.save();
-    console.log("Account Created!");
+    console.log("User Created!");
     console.log(user);
-    return res.redirect("/home");
+    // return res.redirect("/home");
   } catch (e) {
-    console.log("Error");
-    return res.redirect("/register");
+    console.log("Error in User Creation");
+    // return res.redirect("/register");
   }
 });
 
 app.delete("/deleteUser/:id", async (req, res) => {
-  const user = await User.findOne({ role: "user" }); //need to get the actual id
+  const user = await User.findById(res.locals.currentUser);
   console.log("User to be deleted = ", user);
   await User.findByIdAndDelete(user._id);
   return res.redirect("/home");
 });
 
-app.patch("/editUser/:id", async (req, res) => {
-  const user = await User.findOne({ role: "user" }); //need to get the actual id
+app.patch("/editUser", upload.single("file"), async (req, res) => {
+  const user = await User.findById(res.locals.currentUser);
   console.log("User to be edited = ", user);
-  const { username, firstName, lastName, email } = req.body;
+  const { username, firstName, lastName, email, password } = req.body;
   const editedUser = await User.findByIdAndUpdate(user._id, {
     username,
     firstName,
     lastName,
     email,
   });
+  if (req.file) {
+    editedUser.image = { url: req.file.path, filename: req.file.filename };
+  }
+  await editedUser.setPassword(password);
   await editedUser.save();
   return res.redirect("/home");
+});
+
+app.post("/logout", (req, res) => {
+  req.logout();
+  console.log("Logged Out");
+  res.redirect("/home");
 });
 
 //contact form reciever mail

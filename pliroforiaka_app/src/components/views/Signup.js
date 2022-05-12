@@ -78,7 +78,7 @@ const Signup = (props) => {
     data.append("password", password);
     data.append("file", file);
 
-    Axios.post("http://localhost:3000/register", data)
+    Axios.post("/registerUser", data)
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
     changePageNameFn("Home");

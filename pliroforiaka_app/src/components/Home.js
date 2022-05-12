@@ -1,35 +1,123 @@
 import "./Home.css";
 import HomeCard from "./HomeCard";
+import React, { useState } from "react";
 import staticData from "../staticData";
+import Axios from "axios";
 
 const { articles } = staticData;
 
 const Home = (state) => {
+  // test forms start
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [file, setFile] = useState("");
+
+  const send = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("username", username);
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("file", file);
+
+    Axios.patch("/editUser", data)
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+    changePageNameFn("Profile");
+  };
+
+  //test forms end
+
   const { changePageNameFn } = state;
   return (
     <>
-    {/* test forms start*/}
+      {/* test forms start*/}
+
       <form action="/testLogin" method="POST">
         <button>testLogin</button>
       </form>
+
       <form action="/deleteUser/:id?_method=DELETE" method="POST">
         <button>Delete User</button>
       </form>
-      <form action="/editUser/:id?_method=PATCH" method="POST">
+
+      <form action="/editUser?_method=PATCH" method="POST">
         <h3>Edit User</h3>
-        <input name="username" type="text" placeholder="Όνομα χρήστη..." />
-        <input name="firstName" type="text" placeholder="Όνομα..." />
-        <input name="lastName" type="text" placeholder="Επώνυμο..." />
-        <input name="email" type="email" placeholder="Διεύθυνση email..." />
-        <input type="file" id="image" name="image"/>
-        <button>Edit User</button>
+        <input
+          name="username"
+          type="text"
+          placeholder="Όνομα χρήστη..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setUsername(value);
+          }}
+        />
+        <input
+          name="firstName"
+          type="text"
+          placeholder="Όνομα..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setFirstName(value);
+          }}
+        />
+        <input
+          name="lastName"
+          type="text"
+          placeholder="Επώνυμο..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setLastName(value);
+          }}
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Διεύθυνση email..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setEmail(value);
+          }}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Κωδικός..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setPassword(value);
+          }}
+        />
+        <input
+          type="file"
+          id="image"
+          accept=".jpg"
+          className="form-control"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            setFile(file);
+          }}
+        />
+        <button type="submit" onClick={send}>
+          Edit User
+        </button>
       </form>
-      <form action="/editArticle/:id?_method=PATCH" method="POST">
+
+      <form action="#">
         <h3>Edit Article</h3>
         <input name="title" type="text" placeholder="title..." />
         <input name="body" type="text" placeholder="body..." />
         <input name="description" type="text" placeholder="description..." />
-        <input type="file" id="image" name="image"/>
+        <input type="file" id="image" name="image" />
+      </form>
+
+      <form action="/logout" method="POST">
+        <button>Logout</button>
       </form>
       {/* test forms end */}
       <div
