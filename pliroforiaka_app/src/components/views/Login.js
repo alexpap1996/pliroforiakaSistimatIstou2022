@@ -1,7 +1,8 @@
 import "../styles/ErrorPage.css";
 import "../styles/Formstyle.css";
-import React from "react";
+import React, { useState } from "react";
 import mainLogo from "../../resources/gardenblack.png";
+import Axios from "axios";
 
 let currUsername = "";
 let currPassword = "";
@@ -41,6 +42,23 @@ const Login = (props) => {
     changePageNameFn,
   } = props;
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("username", username);
+    data.append("password", password);
+
+    await Axios.post("/login", { username, password })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => console.log(e));
+    changePageNameFn("Home");
+  };
+
   return (
     <div className="container pt-5">
       <div className="narrow-form d-flex flex-column align-items-center pt-5">
@@ -52,12 +70,7 @@ const Login = (props) => {
           alt="main logo"
         ></img>
         <h2 className="mb-4">Please log in</h2>
-        <form
-          action="/login"
-          method="POST"
-          className="validated-form"
-          noValidate
-        >
+        <form className="validated-form" noValidate>
           <div className="mb-3">
             <input
               className="form-control"
@@ -66,6 +79,10 @@ const Login = (props) => {
               name="username"
               autoFocus
               required
+              onChange={(event) => {
+                const { value } = event.target;
+                setUsername(value);
+              }}
             />
             <div className="valid-feedback">Looks good!</div>
           </div>
@@ -77,10 +94,16 @@ const Login = (props) => {
               id="password"
               name="password"
               required
+              onChange={(event) => {
+                const { value } = event.target;
+                setPassword(value);
+              }}
             />
             <div className="valid-feedback">Looks good!</div>
           </div>
-          <button className="btn btn-success btn-block">Login</button>
+          <button className="btn btn-success btn-block" onClick={login}>
+            Login
+          </button>
         </form>
         {loginError && (
           <div className="alert alert-danger mt-3">{loginError}</div>

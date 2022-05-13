@@ -10,11 +10,16 @@ module.exports.isLoggedIn = (req, res, next) => {
 };
 
 module.exports.isAuthor = async (req, res, next) => {
-  const { id } = req.params;
-  const article = await Article.findById(id);
-  if (!article.author.equals(req.user._id)) {
+  const {id} = req.params;
+  const user = await User.findById(res.locals.currentUser);
+  const article = await Article.findById(id); //need to get article id from react
+  if (!article.author.equals(user._id)) {
     alert("You don't have permission for that!");
-    return res.redirect("/home");
+    return res.redirect("/articles");
   }
   next();
 };
+
+module.exports.hasLiked = async (req,res,next)=>{
+  //check if user has already liked the article
+}

@@ -7,7 +7,15 @@ import Axios from "axios";
 const { articles } = staticData;
 
 const Home = (state) => {
-  // test forms start
+  //test Login
+  const testLogin = (e) => {
+    e.preventDefault();
+    Axios.post("/testLogin")
+      .then((res) => console.log("You are logged in as ", res.data))
+      .catch((e) => console.log(e));
+  };
+
+  // user edit form
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -26,28 +34,65 @@ const Home = (state) => {
     data.append("file", file);
 
     Axios.patch("/editUser", data)
-      .then((res) => console.log(res))
+      .then((res) => console.log("Edited user data = ", res.data))
       .catch((e) => console.log(e));
     changePageNameFn("Profile");
   };
 
-  //test forms end
+  //article create-edit form
+
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [description, setDescription] = useState("");
+  const [articleFile, setArticleFile] = useState("");
+
+  const createArticle = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("title", title);
+    data.append("body", body);
+    data.append("description", description);
+    data.append("articleFile", articleFile);
+
+    Axios.post("/createArticle", data)
+      .then((res) => console.log("Created new article = ", res.data))
+      .catch((e) => console.log(e));
+    changePageNameFn("Articles");
+  };
+
+  const editArticle = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("title", title);
+    data.append("body", body);
+    data.append("description", description);
+    data.append("articleFile", articleFile);
+
+    Axios.patch("/editArticle", data)
+      .then((res) => console.log("Edited article = ", res.data))
+      .catch((e) => console.log(e));
+    changePageNameFn("Articles");
+  };
 
   const { changePageNameFn } = state;
   return (
     <>
-      {/* test forms start*/}
-
-      <form action="/testLogin" method="POST">
-        <button>testLogin</button>
+      {/* User forms start*/}
+      <h3>User backend</h3>
+      {/* test if logged in */}
+      <form action="#">
+        <button type="submit" onClick={testLogin}>
+          testLogin
+        </button>
       </form>
 
-      <form action="/deleteUser/:id?_method=DELETE" method="POST">
+      {/* delete user */}
+      <form action="/deleteUser?_method=DELETE" method="POST">
         <button>Delete User</button>
       </form>
 
-      <form action="/editUser?_method=PATCH" method="POST">
-        <h3>Edit User</h3>
+      {/* edit user */}
+      <form>
         <input
           name="username"
           type="text"
@@ -108,18 +153,109 @@ const Home = (state) => {
         </button>
       </form>
 
-      <form action="#">
-        <h3>Edit Article</h3>
-        <input name="title" type="text" placeholder="title..." />
-        <input name="body" type="text" placeholder="body..." />
-        <input name="description" type="text" placeholder="description..." />
-        <input type="file" id="image" name="image" />
-      </form>
-
       <form action="/logout" method="POST">
         <button>Logout</button>
       </form>
-      {/* test forms end */}
+
+      {/* User forms end */}
+
+      {/* Article forms start*/}
+      <h3>Article backend</h3>
+
+      {/* Create Article */}
+
+      <form>
+        <input
+          name="title"
+          type="text"
+          placeholder="Title..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setTitle(value);
+          }}
+        />
+        <input
+          name="body"
+          type="text"
+          placeholder="body..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setBody(value);
+          }}
+        />
+        <input
+          name="description"
+          type="text"
+          placeholder="description..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setDescription(value);
+          }}
+        />
+        <input
+          type="file"
+          accept=".jpg"
+          className="form-control"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            setArticleFile(file);
+          }}
+        />
+        <button type="submit" onClick={createArticle}>
+          Create Article
+        </button>
+      </form>
+
+      {/* edit Article */}
+      <form>
+        <input
+          name="title"
+          type="text"
+          placeholder="Title..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setTitle(value);
+          }}
+        />
+        <input
+          name="body"
+          type="text"
+          placeholder="body..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setBody(value);
+          }}
+        />
+        <input
+          name="description"
+          type="text"
+          placeholder="description..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setDescription(value);
+          }}
+        />
+        <input
+          type="file"
+          accept=".jpg"
+          className="form-control"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            setArticleFile(file);
+          }}
+        />
+        <button type="submit" onClick={editArticle}>
+          Edit Article
+        </button>
+      </form>
+
+      {/* delete Article */}
+      <form action="/deleteArticle?_method=DELETE" method="POST">
+        <button>Delete Article</button>
+      </form>
+
+      {/* Article forms end */}
+
       <div
         id="carouselExampleFade"
         className="carousel slide carousel-fade carousel-dark"

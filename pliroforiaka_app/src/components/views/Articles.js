@@ -50,8 +50,6 @@ const getArticleData = (articleId) => {
 
 const Articles = (state) => {
   const { changePageNameFn, searchTerm } = state;
-  let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-  console.log("user id = ", cookieValue)
 
   const filteredArticles = getFilteredArticles(articles, searchTerm, changePageNameFn)
 

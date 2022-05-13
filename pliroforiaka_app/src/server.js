@@ -11,11 +11,13 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("../models/user");
+const Article = require("../models/article");
 const MongoDBStore = require("connect-mongo");
 const { isLoggedIn, isAuthor } = require("./auth");
 const methodOverride = require("method-override");
 const { storage, cloudinary } = require("./ImageHosting");
 const multer = require("multer");
+const { findById } = require("../models/user");
 const upload = multer({ storage, limits: { fieldSize: 5 * 1024 * 1024 } }); //5MB limit
 
 //connect to DB
@@ -76,41 +78,42 @@ app.use((req, res, next) => {
 });
 
 //routes
-app.post("/testLogin", isLoggedIn, (req, res) => {
-  res.send("You are logged in");
+app.post("/testLogin", isLoggedIn, async (req, res) => {
+  const user = await User.findById(res.locals.currentUser);
+  res.json(user);
 });
 
 app.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
-  (req, res) => {
+  async (req, res) => {
+    const currentUser = await User.findById(res.locals.currentUser);
     console.log("LOGGED IN SUCCESFULLY");
-    res.redirect(`home`);
+    console.log(currentUser);
+    res.json(currentUser);
   }
 );
 
 app.post("/registerUser", upload.single("file"), async (req, res) => {
-  try {
-    const { email, username, firstName, lastName, password } = req.body;
-    const user = new User({
-      email,
-      username,
-      firstName,
-      lastName,
-    });
+  const { email, username, firstName, lastName, password } = req.body;
+  const user = new User({
+    email,
+    username,
+    firstName,
+    lastName,
+  });
+  if (req.file) {
     user.image = { url: req.file.path, filename: req.file.filename };
-    await User.register(user, password);
-    await user.save();
-    console.log("User Created!");
-    console.log(user);
-    // return res.redirect("/home");
-  } catch (e) {
-    console.log("Error in User Creation");
-    // return res.redirect("/register");
   }
+  await User.register(user, password);
+  await user.save();
+  console.log("User Created!");
+  console.log(user);
+  res.json(user);
+  // return res.redirect("/home");
 });
 
-app.delete("/deleteUser/:id", async (req, res) => {
+app.delete("/deleteUser", async (req, res) => {
   const user = await User.findById(res.locals.currentUser);
   console.log("User to be deleted = ", user);
   await User.findByIdAndDelete(user._id);
@@ -118,21 +121,31 @@ app.delete("/deleteUser/:id", async (req, res) => {
 });
 
 app.patch("/editUser", upload.single("file"), async (req, res) => {
-  const user = await User.findById(res.locals.currentUser);
-  console.log("User to be edited = ", user);
-  const { username, firstName, lastName, email, password } = req.body;
-  const editedUser = await User.findByIdAndUpdate(user._id, {
-    username,
-    firstName,
-    lastName,
-    email,
-  });
-  if (req.file) {
-    editedUser.image = { url: req.file.path, filename: req.file.filename };
+  try {
+    const user = await User.findById(res.locals.currentUser);
+    console.log("User before edit = ", user);
+    const { username, firstName, lastName, email, password } = req.body;
+    const editedUser = await User.findByIdAndUpdate(
+      user._id,
+      {
+        username,
+        firstName,
+        lastName,
+        email,
+      },
+      { new: true }
+    );
+    if (req.file) {
+      editedUser.image = { url: req.file.path, filename: req.file.filename };
+    }
+    await editedUser.setPassword(password);
+    await editedUser.save();
+    console.log("User after edit = ", editedUser);
+    res.json(editedUser);
+    // return res.redirect("/profile");
+  } catch (e) {
+    console.log("Error in User edit");
   }
-  await editedUser.setPassword(password);
-  await editedUser.save();
-  return res.redirect("/home");
 });
 
 app.post("/logout", (req, res) => {
@@ -141,12 +154,102 @@ app.post("/logout", (req, res) => {
   res.redirect("/home");
 });
 
+app.post(
+  "/createArticle",
+  isLoggedIn,
+  upload.single("articleFile"),
+  async (req, res) => {
+    try {
+      const author = res.locals.currentUser;
+      const { title, body, description } = req.body;
+      const article = new Article({
+        title,
+        body,
+        description,
+        author,
+      });
+      if (req.file) {
+        article.image = { url: req.file.path, filename: req.file.filename };
+      }
+      await article.save();
+      console.log("Article Created!");
+      console.log(article);
+      res.json(article);
+      // return res.redirect("/articles");
+    } catch (e) {
+      console.log("Error in Article Creation");
+      // return res.redirect("/register");
+    }
+  }
+);
+
+app.patch(
+  "/editArticle",
+  isLoggedIn,
+  //need to add isAuthor middleware
+  upload.single("articleFile"),
+  async (req, res) => {
+    try {
+      const id = "627ebc7566bb44f77421fc6c"; //taken from DB for now
+      const { title, body, description } = req.body;
+      const article = await Article.findById(id);
+      console.log("Article before edit = ", article);
+      const editedArticle = await Article.findByIdAndUpdate(
+        article._id,
+        {
+          title,
+          body,
+          description,
+        },
+        { new: true }
+      );
+      if (req.file) {
+        editedArticle.image = {
+          url: req.file.path,
+          filename: req.file.filename,
+        };
+      }
+      await editedArticle.save();
+      console.log("Article after edit = ", editedArticle);
+      res.json(editedArticle);
+      // return res.redirect("/article");
+    } catch (e) {
+      console.log("Error in Article Edit");
+      // return res.redirect("/register");
+    }
+  }
+);
+
+app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
+  //need to add isAuthor middleware
+  const id = "627ebc7566bb44f77421fc6c"; //taken from DB for now
+  const article = await Article.findById(id);
+  console.log("Article to be deleted = ", article);
+  await Article.findByIdAndDelete(article._id);
+  // return res.redirect("/article");
+});
+
+app.post("/addLike", isLoggedIn, async (req, res) => {
+  //need to add hasLiked middleware
+  const id = "627ebc11e8a25062de73dd6c"; //taken from DB for now
+  const article = await Article.findById(id);
+  console.log("Article likes before = ",article.likeCounter )
+  article.likeCounter++;
+  const userId = res.locals.currentUser;
+  const user = await User.findById(userId);
+  article.UserLikes.push(user);
+  await article.save();
+  console.log("Article likes after = ",article.likeCounter )
+  console.log("Users liked article = ",article.UserLikes )
+  // return res.redirect("/article");
+});
+
 //contact form reciever mail
 const contactEmail = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "greenTips2022@gmail.com",
-    pass: "greentips123",
+    user: process.env.CONTACT_MAIL,
+    pass: process.env.CONTACT_MAIL_PASS,
   },
 });
 
@@ -159,13 +262,11 @@ contactEmail.verify((error) => {
   }
 });
 
-router.post("/contact", (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const message = req.body.message;
+app.post("/contact", (req, res) => {
+  const { name, email, message } = req.body;
   const mail = {
     from: name,
-    to: "greenTips2022@gmail.com",
+    to: process.env.CONTACT_MAIL,
     subject: "Contact Form Message",
     html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
   };

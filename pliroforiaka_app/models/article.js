@@ -20,7 +20,7 @@ const ArticleSchema = new Schema({
   },
   created: {
     type: Date,
-    required: true,
+    default: new Date()
   },
   author: {
     type: Schema.Types.ObjectId,

@@ -36,7 +36,7 @@ const Profile = (state) => {
               <div className="card-body">
                 <form>
                   <div className="mb-3 p-form-control-wrapper">
-                    <label className="small mb-1" for="username"></label>
+                    <label className="small mb-1" htmlFor="username"></label>
                     <input
                       className="form-control"
                       id="username"
@@ -48,7 +48,7 @@ const Profile = (state) => {
                     <div className="col-md-6 p-form-control-wrapper">
                       <label
                         className="small mb-1"
-                        for="firstName"
+                        htmlFor="firstName"
                       ></label>
                       <input
                         className="form-control"
@@ -58,7 +58,7 @@ const Profile = (state) => {
                       />
                     </div>
                     <div className="col-md-6 p-form-control-wrapper">
-                      <label className="small mb-1" for="lastName"></label>
+                      <label className="small mb-1" htmlFor="lastName"></label>
                       <input
                         className="form-control"
                         id="lastName"
@@ -70,7 +70,7 @@ const Profile = (state) => {
                   <div className="mb-3 p-form-control-wrapper">
                     <label
                       className="small mb-1"
-                      for="email"
+                      htmlFor="email"
                     ></label>
                     <input
                       className="form-control"
