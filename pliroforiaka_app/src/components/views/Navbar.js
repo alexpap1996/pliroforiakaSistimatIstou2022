@@ -1,6 +1,5 @@
 import mainLogo from "../../resources/gardenblack.png";
 import SearchBox from "../SearchBox";
-import { useState } from "react";
 
 let changePageName = () => {};
 let logoutUser = () => {};

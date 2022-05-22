@@ -1,13 +1,261 @@
 import "./Home.css";
 import HomeCard from "./HomeCard";
+import React, { useState } from "react";
 import staticData from "../staticData";
+import Axios from "axios";
 
 const { articles } = staticData;
 
 const Home = (state) => {
+  //test Login
+  const testLogin = (e) => {
+    e.preventDefault();
+    Axios.post("/testLogin")
+      .then((res) => console.log("You are logged in as ", res.data))
+      .catch((e) => console.log(e));
+  };
+
+  // user edit form
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [file, setFile] = useState("");
+
+  const send = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("username", username);
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("file", file);
+
+    Axios.patch("/editUser", data)
+      .then((res) => console.log("Edited user data = ", res.data))
+      .catch((e) => console.log(e));
+    changePageNameFn("Profile");
+  };
+
+  //article create-edit form
+
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [description, setDescription] = useState("");
+  const [articleFile, setArticleFile] = useState("");
+
+  const createArticle = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("title", title);
+    data.append("body", body);
+    data.append("description", description);
+    data.append("articleFile", articleFile);
+
+    Axios.post("/createArticle", data)
+      .then((res) => console.log("Created new article = ", res.data))
+      .catch((e) => console.log(e));
+    changePageNameFn("Articles");
+  };
+
+  const editArticle = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("title", title);
+    data.append("body", body);
+    data.append("description", description);
+    data.append("articleFile", articleFile);
+
+    Axios.patch("/editArticle", data)
+      .then((res) => console.log("Edited article = ", res.data))
+      .catch((e) => console.log(e));
+    changePageNameFn("Articles");
+  };
+
   const { changePageNameFn } = state;
   return (
     <>
+      {/* User forms start*/}
+      <h3>User backend</h3>
+      {/* test if logged in */}
+      <form action="#">
+        <button type="submit" onClick={testLogin}>
+          testLogin
+        </button>
+      </form>
+
+      {/* delete user */}
+      <form action="/deleteUser?_method=DELETE" method="POST">
+        <button>Delete User</button>
+      </form>
+
+      {/* edit user */}
+      <form>
+        <input
+          name="username"
+          type="text"
+          placeholder="Όνομα χρήστη..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setUsername(value);
+          }}
+        />
+        <input
+          name="firstName"
+          type="text"
+          placeholder="Όνομα..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setFirstName(value);
+          }}
+        />
+        <input
+          name="lastName"
+          type="text"
+          placeholder="Επώνυμο..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setLastName(value);
+          }}
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Διεύθυνση email..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setEmail(value);
+          }}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Κωδικός..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setPassword(value);
+          }}
+        />
+        <input
+          type="file"
+          id="image"
+          accept=".jpg"
+          className="form-control"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            setFile(file);
+          }}
+        />
+        <button type="submit" onClick={send}>
+          Edit User
+        </button>
+      </form>
+
+      <form action="/logout" method="POST">
+        <button>Logout</button>
+      </form>
+
+      {/* User forms end */}
+
+      {/* Article forms start*/}
+      <h3>Article backend</h3>
+
+      {/* Create Article */}
+
+      <form>
+        <input
+          name="title"
+          type="text"
+          placeholder="Title..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setTitle(value);
+          }}
+        />
+        <input
+          name="body"
+          type="text"
+          placeholder="body..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setBody(value);
+          }}
+        />
+        <input
+          name="description"
+          type="text"
+          placeholder="description..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setDescription(value);
+          }}
+        />
+        <input
+          type="file"
+          accept=".jpg"
+          className="form-control"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            setArticleFile(file);
+          }}
+        />
+        <button type="submit" onClick={createArticle}>
+          Create Article
+        </button>
+      </form>
+
+      {/* edit Article */}
+      <form>
+        <input
+          name="title"
+          type="text"
+          placeholder="Title..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setTitle(value);
+          }}
+        />
+        <input
+          name="body"
+          type="text"
+          placeholder="body..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setBody(value);
+          }}
+        />
+        <input
+          name="description"
+          type="text"
+          placeholder="description..."
+          onChange={(event) => {
+            const { value } = event.target;
+            setDescription(value);
+          }}
+        />
+        <input
+          type="file"
+          accept=".jpg"
+          className="form-control"
+          onChange={(event) => {
+            const file = event.target.files[0];
+            setArticleFile(file);
+          }}
+        />
+        <button type="submit" onClick={editArticle}>
+          Edit Article
+        </button>
+      </form>
+
+      {/* delete Article */}
+      <form action="/deleteArticle?_method=DELETE" method="POST">
+        <button>Delete Article</button>
+      </form>
+
+      {/* Article forms end */}
+
       <div
         id="carouselExampleFade"
         className="carousel slide carousel-fade carousel-dark"
@@ -70,11 +318,12 @@ const Home = (state) => {
       </div>
       <div className="container my-5">
         <div className="card-group">
-          <HomeCard article={articles[1]} changePageNameFn={changePageNameFn}/>
-          <HomeCard article={articles[2]} changePageNameFn={changePageNameFn}/>
-          <HomeCard article={articles[3]} changePageNameFn={changePageNameFn}/>
+          <HomeCard article={articles[1]} changePageNameFn={changePageNameFn} />
+          <HomeCard article={articles[2]} changePageNameFn={changePageNameFn} />
+          <HomeCard article={articles[3]} changePageNameFn={changePageNameFn} />
         </div>
       </div>
+
       <footer>
         <div className="footer-content-container">
           <a href="https://www.youtube.com">

@@ -1,5 +1,6 @@
 import "../styles/article.css";
 import { motion } from "framer-motion";
+import Axios from "axios";
 
 const Article = (state) => {
   const { changePageNameFn } = state;
@@ -12,6 +13,16 @@ const Article = (state) => {
     articleId,
     articleDescription,
   } = state.pageData;
+
+  const addLike = (e) => {
+    e.preventDefault();
+
+    Axios.post("/addLike")
+      .then((res) => {console.log(res)})
+      .catch((e) => console.log(e));
+      //update like button
+  };
+
   const date = new Date(dateCreated);
   return (
     <>
@@ -65,6 +76,7 @@ const Article = (state) => {
           className="btn mt-auto hover-dark c-bg-green bottom mybtn right"
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.1, type: "tween" }}
+          onClick={addLike}
         >
           Like
         </motion.button>
