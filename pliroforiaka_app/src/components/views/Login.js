@@ -4,35 +4,6 @@ import React, { useState } from "react";
 import mainLogo from "../../resources/gardenblack.png";
 import Axios from "axios";
 
-let currUsername = "";
-let currPassword = "";
-
-const onLoginButtonClick = (
-  validateFn,
-  setLoginError,
-  setCurrentUser,
-  changePageNameFn
-) => {
-  console.log(currUsername);
-  const foundUser = validateFn(currUsername, currPassword);
-  if (!foundUser) {
-    setLoginError("User Not Found");
-  } else {
-    //login logic here
-    setCurrentUser(foundUser);
-    setLoginError(undefined);
-    changePageNameFn("Home");
-  }
-};
-
-const toggleActiveClass = (value, classList) => {
-  if (!value) {
-    classList.remove("active");
-  } else {
-    classList.add("active");
-  }
-};
-
 const Login = (props) => {
   const {
     validateUserFn,
@@ -53,7 +24,11 @@ const Login = (props) => {
 
     await Axios.post("/login", { username, password })
       .then((res) => {
-        console.log(res);
+        if (res.data) {
+          setCurrentUser(res.data);
+          setLoginError(undefined);
+          changePageNameFn("Home");
+        }
       })
       .catch((e) => console.log(e));
     changePageNameFn("Home");

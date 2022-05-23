@@ -1,7 +1,17 @@
 import "../styles/Profile.css";
 import anon from "../../resources/anon.PNG"
+import ErrorPage from "./ErrorPage"
 
 const Profile = (state) => {
+  const { loggedInUser: user, isUserLoggedIn} = state
+  /* 
+    you can now access the user's properties with user.property
+    properties are: email, firstname, lastName, image, role, username
+  */
+  if (!isUserLoggedIn) {
+    return <ErrorPage errorCode='401' errorMessage='Δεν ειστε συνδεδεμενος'/>
+  } 
+
   return (
     <div>
       <div className="container-xl px-4 mt-4">

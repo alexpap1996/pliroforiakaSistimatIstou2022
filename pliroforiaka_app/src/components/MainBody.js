@@ -34,6 +34,7 @@ function MainBody(state) {
     signupError,
     setCurrentUserFn,
     isUserLoggedIn,
+    loggedInUser,
   } = state
   const PageToReturn = pageMap[pageName]
 
@@ -50,6 +51,7 @@ function MainBody(state) {
         searchTerm={searchTerm}
         pageData={pageData}
         isUserLoggedIn={isUserLoggedIn}
+        loggedInUser={loggedInUser}
       />
     </>
   );
