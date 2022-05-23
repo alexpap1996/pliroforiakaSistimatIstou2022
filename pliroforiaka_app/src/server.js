@@ -26,6 +26,7 @@ mongoose.connect("mongodb://localhost:27017/makeItGreen", {
   useUnifiedTopology: true,
 });
 
+
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
@@ -74,10 +75,23 @@ passport.deserializeUser(User.deserializeUser());
 //middleware
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.currentArticle = req.Article
   next();
 });
 
 //routes
+app.get("/articles", async (req,res)=>{
+  try {
+    // isLoggedIn,   // Do i need that ??
+      const postArticles = await Article.find();
+      console.log("1234")
+      res.status(200).json(postArticles);
+  }catch{
+    res.status(404).json("Error on articles");
+  }
+})
+
+
 app.post("/testLogin", isLoggedIn, async (req, res) => {
   const user = await User.findById(res.locals.currentUser);
   res.json(user);

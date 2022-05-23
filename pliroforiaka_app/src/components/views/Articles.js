@@ -4,7 +4,6 @@ import "../styles/ErrorPage.css";
 import staticData from "../../staticData"
 
 const { articles } = staticData
-
 const displayingResultsText = (searchTerm, numOfArticles) => {
   return (
     <div className="d-flex flex-column align-items-center">
