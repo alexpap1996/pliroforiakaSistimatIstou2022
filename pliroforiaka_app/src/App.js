@@ -16,6 +16,7 @@ class App extends React.Component {
     loginError: undefined,
     signupError: undefined,
     isUserLoggedIn: false,
+    loggedInUser: undefined,
   };
 
   constructor(props) {
@@ -58,11 +59,13 @@ class App extends React.Component {
   }
 
   setCurrentUser (loggedInUser) {
-    this.setState({loggedInUser})
+    this.setState({ loggedInUser })
+    this.setState({ isUserLoggedIn: true })
   }
 
-  logoutUser (){
+  async logoutUser (){
     this.setState({isUserLoggedIn: false})
+    this.setState({ loggedInUser: undefined })
     this.changePageName('Home')
   }
 
@@ -79,6 +82,7 @@ class App extends React.Component {
           changePageNameFn={this.changePageName}
           updateSearchTerm={this.updateSearchTerm}
           isUserLoggedIn={this.state.isUserLoggedIn}
+          loggedInUser={this.state.loggedInUser}
           logoutUserFn={this.logoutUser}
         />
         <MainBody
@@ -88,6 +92,7 @@ class App extends React.Component {
           loginError={this.state.loginError}
           signupError={this.state.signupError}
           isUserLoggedIn={this.state.isUserLoggedIn}
+          loggedInUser={this.state.loggedInUser}
           changePageNameFn={this.changePageName}
           validateUserFn={this.validateUser}
           setLoginErrorFn={this.setLoginError}
