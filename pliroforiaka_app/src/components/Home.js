@@ -4,12 +4,35 @@ import React, { useState } from "react";
 import staticData from "../staticData";
 import Axios from "axios";
 
+let getArticles
+let changePageName
 const { articles } = staticData;
+
+const createArticle = (e) => {
+  e.preventDefault();
+  const form = document.querySelector('#create')
+  const formObj = [...form.elements]
+  const titleVal = formObj.find(el => el === 'title').value
+  const data = new FormData();
+  data.append("title", titleVal);
+  data.append("body", "body");
+  data.append("description", "description");
+  data.append("articleFile", "articleFile");
+
+  Axios.post("/createArticle", data)
+    .then((res) => {
+      getArticles().then(res => {
+        changePageName("Articles")
+      })
+    })
+    .catch((e) => console.log(e));
+};
 
 const Home = (state) => {
   //test Login
   const { changePageNameFn , getArticlesFn } = state;
-
+  changePageName = changePageNameFn
+  getArticles = getArticlesFn
   const testLogin = (e) => {
     e.preventDefault();
     Axios.post("/testLogin")
@@ -48,22 +71,7 @@ const Home = (state) => {
   const [description, setDescription] = useState("");
   const [articleFile, setArticleFile] = useState("");
 
-  const createArticle = (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("title", title);
-    data.append("body", body);
-    data.append("description", description);
-    data.append("articleFile", articleFile);
-
-    Axios.post("/createArticle", data)
-      .then((res) => {
-        getArticlesFn().then(res => {
-          changePageNameFn("Articles")
-        })
-      })
-      .catch((e) => console.log(e));
-  };
+  
 
   const editArticle = (e) => {
     e.preventDefault();
@@ -169,7 +177,7 @@ const Home = (state) => {
 
       {/* Create Article */}
 
-      <form>
+      <form name="create" id="create">
         <input
           name="title"
           type="text"

@@ -36,6 +36,7 @@ function MainBody(state) {
     isUserLoggedIn,
     loggedInUser,
     posts,
+    getArticlesFn,
   } = state
   const PageToReturn = pageMap[pageName]
 
@@ -54,6 +55,7 @@ function MainBody(state) {
         pageData={pageData}
         isUserLoggedIn={isUserLoggedIn}
         loggedInUser={loggedInUser}
+        getArticlesFn={getArticlesFn}
       />
     </>
   );
