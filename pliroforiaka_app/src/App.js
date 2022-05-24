@@ -5,6 +5,7 @@ import Navbar from "./components/views/Navbar";
 import MainBody from "./components/MainBody";
 import staticData from "./staticData";
 import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const { users, articles } = staticData;
 
@@ -17,10 +18,15 @@ class App extends React.Component {
     signupError: undefined,
     isUserLoggedIn: false,
     loggedInUser: undefined,
+    posts : [],
   };
+
 
   constructor(props) {
     super(props);
+    axios.get("http://localhost:3000/articles").then(res => {
+      this.setState({posts : res.data})
+    })
 
     this.changePageName = this.changePageName.bind(this);
     this.validateUser = this.validateUser.bind(this);
@@ -86,6 +92,7 @@ class App extends React.Component {
           logoutUserFn={this.logoutUser}
         />
         <MainBody
+          posts = {this.state.posts}
           pageName={this.state.pageName}
           searchTerm={this.state.searchTerm}
           pageData={this.state.pageData}

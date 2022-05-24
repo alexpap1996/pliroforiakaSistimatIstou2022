@@ -20,6 +20,9 @@ const multer = require("multer");
 const { findById } = require("../models/user");
 const upload = multer({ storage, limits: { fieldSize: 5 * 1024 * 1024 } }); //5MB limit
 
+
+
+
 //connect to DB
 mongoose.connect("mongodb://localhost:27017/makeItGreen", {
   useNewUrlParser: true,
@@ -84,12 +87,12 @@ app.get("/articles", async (req,res)=>{
   try {
     // isLoggedIn,   // Do i need that ??
       const postArticles = await Article.find();
-      console.log("1234")
+      console.log(postArticles)
       res.status(200).json(postArticles);
   }catch{
     res.status(404).json("Error on articles");
   }
-})
+});
 
 
 app.post("/testLogin", isLoggedIn, async (req, res) => {
@@ -236,7 +239,7 @@ app.patch(
 
 app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
   //need to add isAuthor middleware
-  const id = "627ebc7566bb44f77421fc6c"; //taken from DB for now
+  const id = "628d15d7d777ea7547700c05"; //taken from DB for now
   const article = await Article.findById(id);
   console.log("Article to be deleted = ", article);
   await Article.findByIdAndDelete(article._id);
