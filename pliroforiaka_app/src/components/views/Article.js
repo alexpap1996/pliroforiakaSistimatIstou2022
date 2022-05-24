@@ -1,4 +1,4 @@
-import "../styles/article.css";
+import "../styles/Article.css";
 import { motion } from "framer-motion";
 import Axios from "axios";
 
