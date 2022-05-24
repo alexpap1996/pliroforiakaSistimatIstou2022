@@ -192,9 +192,10 @@ app.post(
       console.log("Article Created!");
       console.log(article);
       res.json(article);
-      // return res.redirect("/articles");
+      return res.redirect("/articles");
     } catch (e) {
       console.log("Error in Article Creation");
+      console.log(e);
       // return res.redirect("/register");
     }
   }

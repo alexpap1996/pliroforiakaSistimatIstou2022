@@ -11,7 +11,7 @@ import staticData from "../../staticData";
 // })
 
 
-const { articles } = staticData
+// const { articles } = staticData
 
 const displayingResultsText = (searchTerm, numOfArticles) => {
   return (
@@ -23,7 +23,7 @@ const displayingResultsText = (searchTerm, numOfArticles) => {
 }
 
 const getFilteredArticles = (articles, Term, changePageNameFn) => {
-  return Object.values(articles)
+  return articles
     .filter((article) => {
       if (!Term) return article;
       else if (article.title.toLowerCase().includes(Term.toLowerCase()))
@@ -33,7 +33,7 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
       <div className="card myCard mx-3" key={key + article.title}>
         <img
           className="card-img-top myimg"
-          src={'https://res.cloudinary.com/dgzlym20q/image/upload/v1652174176/makeItGreen/water_sj3yqk.jpg'}
+          src={article.image?.url}
           alt="article"
         />
         <div className="card-body d-flex flex-column">
@@ -43,7 +43,7 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
             className="btn mt-auto hover-dark c-bg-green bottom mybtn"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.1, type: "tween" }}
-            onClick={() => changePageNameFn("Article", getArticleData(article._id))}
+            onClick={() => changePageNameFn("Article", article)}
           >
             Read more
           </motion.button>
@@ -52,9 +52,9 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
     ))
 }
 
-const getArticleData = (articleId) => {
-  return articles[articleId]
-}
+// const getArticleData = (articleId) => {
+//   return articles[articleId]
+// }
 
 const Articles = (state) => {
   const { changePageNameFn, searchTerm , posts} = state;

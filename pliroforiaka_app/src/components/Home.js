@@ -8,6 +8,8 @@ const { articles } = staticData;
 
 const Home = (state) => {
   //test Login
+  const { changePageNameFn , getArticlesFn } = state;
+
   const testLogin = (e) => {
     e.preventDefault();
     Axios.post("/testLogin")
@@ -55,9 +57,12 @@ const Home = (state) => {
     data.append("articleFile", articleFile);
 
     Axios.post("/createArticle", data)
-      .then((res) => console.log("Created new article = ", res.data))
+      .then((res) => {
+        getArticlesFn().then(res => {
+          changePageNameFn("Articles")
+        })
+      })
       .catch((e) => console.log(e));
-    changePageNameFn("Articles");
   };
 
   const editArticle = (e) => {
@@ -74,7 +79,7 @@ const Home = (state) => {
     changePageNameFn("Articles");
   };
 
-  const { changePageNameFn } = state;
+
   return (
     <>
       {/* User forms start*/}

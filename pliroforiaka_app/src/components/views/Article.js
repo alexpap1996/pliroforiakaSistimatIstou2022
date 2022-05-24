@@ -7,10 +7,10 @@ const Article = (state) => {
   const {
     title,
     body,
-    imgUrl,
-    authorId,
-    dateCreated,
-    articleId,
+    image,
+    author,
+    created,
+    _id,
     articleDescription,
   } = state.pageData;
 
@@ -23,13 +23,13 @@ const Article = (state) => {
       //update like button
   };
 
-  const date = new Date(dateCreated);
+  const date = new Date(created);
   return (
     <>
       <div className="article-body ">
         <header
           style={{
-            backgroundImage: `url(${imgUrl})`,
+            backgroundImage: `url(${image.url})`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
@@ -40,7 +40,7 @@ const Article = (state) => {
           <p>{body}</p>
           <strong>
             <p className="date">
-              {date.toLocaleDateString("el-GR", {
+              Ημερομηνία: {date.toLocaleDateString("el-GR", {
                 weekday: "long",
                 month: "long",
                 day: "2-digit",
