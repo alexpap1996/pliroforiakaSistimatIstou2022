@@ -8,8 +8,8 @@ const displayingResultsText = (searchTerm, numOfArticles) => {
       <span className="">Displaying results for: "{searchTerm}"</span>
       <span>{numOfArticles} articles found</span>
     </div>
-  )
-}
+  );
+};
 
 const getFilteredArticles = (articles, Term, changePageNameFn) => {
   return articles
@@ -46,23 +46,35 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
           >
             Edit article
           </motion.button>
-          </div>
+        </div>
       </div>
-    ))
-}
+    ));
+};
 
 const Articles = (state) => {
-  const { getArticlesFn ,changePageNameFn, searchTerm , posts} = state;
+  const { getArticlesFn, changePageNameFn, searchTerm, posts } = state;
   // console.log(posts)
-  
-  const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn)
+
+  const filteredArticles = getFilteredArticles(
+    posts,
+    searchTerm,
+    changePageNameFn
+  );
 
   return (
     <>
       <span className="title">Articles</span>
       {searchTerm && displayingResultsText(searchTerm, filteredArticles.length)}
-      <div className="container article-container">
-        {filteredArticles}
+      <div className="container article-container">{filteredArticles}</div>
+      <div className="containerCenter mt-3">
+        <motion.button
+          className="center btn mt-auto hover-dark c-bg-green bottom mybtn"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.1, type: "tween" }}
+          onClick={() => changePageNameFn("CreateArticle")}
+        >
+          Create new article
+        </motion.button>
       </div>
       <button
         type="button"
