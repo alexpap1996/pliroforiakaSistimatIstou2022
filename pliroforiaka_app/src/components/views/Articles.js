@@ -1,17 +1,6 @@
 import { motion } from "framer-motion";
 import "../styles/Articles.css";
 import "../styles/ErrorPage.css";
-import staticData from "../../staticData";
-
-// const url = "http://localhost:3000/articles";
-
-// const fetchData = axios.get(url)
-// .then( response => {
-// console.log(response.data)
-// })
-
-
-// const { articles } = staticData
 
 const displayingResultsText = (searchTerm, numOfArticles) => {
   return (
@@ -38,7 +27,9 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
         />
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">{article.title}</h5>
-          <p className="card-text">{article.articleDescription}</p>
+          <p className="card-text">{article.description}</p>
+        </div>
+        <div className="btn_container">
           <motion.button
             className="btn mt-auto hover-dark c-bg-green bottom mybtn"
             whileHover={{ scale: 1.05 }}
@@ -47,19 +38,23 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
           >
             Read more
           </motion.button>
-        </div>
+          <motion.button
+            className="btn btn-dark mt-auto hover-dark bottom right_button"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.1, type: "tween" }}
+            onClick={() => changePageNameFn("EditArticle", article)}
+          >
+            Edit article
+          </motion.button>
+          </div>
       </div>
     ))
 }
 
-// const getArticleData = (articleId) => {
-//   return articles[articleId]
-// }
-
 const Articles = (state) => {
-  const { changePageNameFn, searchTerm , posts} = state;
-  console.log(posts)
-
+  const { getArticlesFn ,changePageNameFn, searchTerm , posts} = state;
+  // console.log(posts)
+  
   const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn)
 
   return (

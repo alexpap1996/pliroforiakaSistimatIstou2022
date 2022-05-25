@@ -85,9 +85,8 @@ app.use((req, res, next) => {
 //routes
 app.get("/articles", async (req,res)=>{
   try {
-    // isLoggedIn,   // Do i need that ??
+     // console.log(postArticles)
       const postArticles = await Article.find();
-      console.log(postArticles)
       res.status(200).json(postArticles);
   }catch{
     res.status(404).json("Error on articles");
@@ -106,7 +105,7 @@ app.post(
   async (req, res) => {
     const currentUser = await User.findById(res.locals.currentUser);
     console.log("LOGGED IN SUCCESFULLY");
-    console.log(currentUser);
+    console.log(currentUser);   // TODO - FIX NOT WORKING
     res.json(currentUser);
   }
 );
@@ -192,7 +191,7 @@ app.post(
       console.log("Article Created!");
       console.log(article);
       res.json(article);
-      return res.redirect("/articles");
+      // return res.redirect("/articles");
     } catch (e) {
       console.log("Error in Article Creation");
       console.log(e);
@@ -202,14 +201,14 @@ app.post(
 );
 
 app.patch(
-  "/editArticle",
+  "/EditArticle",
   isLoggedIn,
   //need to add isAuthor middleware
   upload.single("articleFile"),
   async (req, res) => {
     try {
-      const id = "627ebc7566bb44f77421fc6c"; //taken from DB for now
-      const { title, body, description } = req.body;
+      const { title, body, description , id } = req.body;
+      console.log(id)  // Database ID Working properly
       const article = await Article.findById(id);
       console.log("Article before edit = ", article);
       const editedArticle = await Article.findByIdAndUpdate(

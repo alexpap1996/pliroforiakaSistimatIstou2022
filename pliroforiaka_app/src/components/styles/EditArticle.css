@@ -1,0 +1,10 @@
+.myContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.myimg1 {
+    width: 450px;
+    height: auto;
+}
+

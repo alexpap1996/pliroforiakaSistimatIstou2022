@@ -18,7 +18,10 @@
 
 .mybtn {
   align-self: flex-start;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
+
 
 .title {
   display: flex;
@@ -29,3 +32,14 @@
   box-shadow: 2px 4px 5px #888888; */
   margin-top: 10px;
 }
+
+.btn_container {
+  
+}
+
+.right_button {
+  margin-left: 115px;
+  margin-bottom: 10px;
+  text-decoration: dotted;
+}
+
