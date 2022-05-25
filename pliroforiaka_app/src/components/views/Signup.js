@@ -16,7 +16,7 @@ const signUpData = {
   confirmpassword: undefined,
 };
 
-const onSignUpButtonClick = () => {
+const formValidation = () => {
   //any field is empty
   if (Object.values(signUpData).some((val) => !val)) {
     return "You must populate all fields";
@@ -41,6 +41,7 @@ const onSignUpButtonClick = () => {
 };
 
 const updateFieldData = (fieldName, fieldValue) => {
+  console.log(fieldName + fieldValue)
   signUpData[fieldName] = fieldValue;
 };
 
@@ -61,15 +62,20 @@ const Signup = (props) => {
   const [file, setFile] = useState("");
 
   const {
-    validateUserFn,
     signupError,
     setSignupError,
-    setCurrentUser,
     changePageNameFn,
   } = props;
 
   const send = (e) => {
     e.preventDefault();
+    const error = formValidation()
+    if (error) {
+      setSignupError(error)
+      return 
+    } else {
+      setSignupError(undefined)
+    }
     const data = new FormData();
     data.append("username", username);
     data.append("firstName", firstName);

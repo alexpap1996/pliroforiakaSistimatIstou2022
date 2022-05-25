@@ -47,7 +47,6 @@ main {
 .date {
   margin-left: -15%;
 }
-
 @media all and (max-width: 400px) {
   main {
     padding: 2rem;

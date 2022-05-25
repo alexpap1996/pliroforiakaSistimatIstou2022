@@ -76,18 +76,26 @@ passport.deserializeUser(User.deserializeUser());
 //middleware
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.currentArticle = req.Article;
   next();
 });
 
 //routes
-app.post(
-  "/testLogin",
-  isLoggedIn,
-  catchError(async (req, res) => {
-    const user = await User.findById(res.locals.currentUser);
-    res.json(user);
-  })
-);
+app.get("/articles", async (req, res) => {
+  try {
+    // isLoggedIn,   // Do i need that ??
+    const postArticles = await Article.find();
+    console.log(postArticles);
+    res.status(200).json(postArticles);
+  } catch {
+    res.status(404).json("Error on articles");
+  }
+});
+
+app.post("/testLogin", isLoggedIn, async (req, res) => {
+  const user = await User.findById(res.locals.currentUser);
+  res.json(user);
+});
 
 app.post(
   "/login",
@@ -177,24 +185,30 @@ app.post(
   "/createArticle",
   isLoggedIn,
   upload.single("articleFile"),
-  catchError(async (req, res) => {
-    const author = res.locals.currentUser;
-    const { title, body, description } = req.body;
-    const article = new Article({
-      title,
-      body,
-      description,
-      author,
-    });
-    if (req.file) {
-      article.image = { url: req.file.path, filename: req.file.filename };
+  async (req, res) => {
+    try {
+      const author = res.locals.currentUser;
+      const { title, body, description } = req.body;
+      const article = new Article({
+        title,
+        body,
+        description,
+        author,
+      });
+      if (req.file) {
+        article.image = { url: req.file.path, filename: req.file.filename };
+      }
+      await article.save();
+      console.log("Article Created!");
+      console.log(article);
+      res.json(article);
+      return res.redirect("/articles");
+    } catch (e) {
+      console.log("Error in Article Creation");
+      console.log(e);
+      // return res.redirect("/register");
     }
-    await article.save();
-    console.log("Article Created!");
-    console.log(article);
-    res.json(article);
-    // return res.redirect("/articles");
-  })
+  }
 );
 
 app.patch(
@@ -229,18 +243,14 @@ app.patch(
   })
 );
 
-app.delete(
-  "/deleteArticle",
-  isLoggedIn,
-  catchError(async (req, res) => {
-    //need to add isAuthor middleware
-    const id = "627ebc7566bb44f77421fc6c"; //taken from DB for now
-    const article = await Article.findById(id);
-    console.log("Article to be deleted = ", article);
-    await Article.findByIdAndDelete(article._id);
-    // return res.redirect("/article");
-  })
-);
+app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
+  //need to add isAuthor middleware
+  const id = "628d15d7d777ea7547700c05"; //taken from DB for now
+  const article = await Article.findById(id);
+  console.log("Article to be deleted = ", article);
+  await Article.findByIdAndDelete(article._id);
+  // return res.redirect("/article");
+});
 
 app.post(
   "/addLike",
@@ -303,7 +313,7 @@ app.all("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
   const { msg = "Unknown Error", code = 404 } = err;
-  res.render("/ErrorPage")
+  // res.render("/ErrorPage");
 });
 
 app.listen(5000, () => console.log("Server Running"));

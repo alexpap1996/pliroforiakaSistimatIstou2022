@@ -1,11 +1,13 @@
 import mainLogo from "../../resources/gardenblack.png";
 import SearchBox from "../SearchBox";
+import Axios from "axios";
 
 let changePageName = () => {};
 let logoutUser = () => {};
 
 const UserNotLoggedInButtons = () => {
-    return (<>
+  return (
+    <>
       <li className="nav-item">
         <button
           className="btn hover-dark c-bg-green me-2"
@@ -16,42 +18,55 @@ const UserNotLoggedInButtons = () => {
         </button>
       </li>
       <li className="nav-item">
-        <button className="btn me-2 hover-dark c-bg-green" type="submit"
+        <button
+          className="btn me-2 hover-dark c-bg-green"
+          type="submit"
           onClick={() => changePageName("Signup")}
         >
           Εγγραφή
         </button>
       </li>
-    </>)
-}
+    </>
+  );
+};
 
 const UserLoggedInButtons = () => {
-  return (<>
-    <li className="nav-item">
-      <button
-        className="btn hover-dark c-bg-green me-2"
-        type="submit"
-        onClick={() => changePageName("Profile")}
-      >
-        Προφιλ
-      </button>
-    </li>
-    <li className="nav-item">
-      <button
-        className="btn hover-dark c-bg-yellow me-2"
-        type="submit"
-        onClick={() => logoutUser()}
-      >
-        Εξοδος
-      </button>
-    </li>
-  </>)
-}
+  return (
+    <>
+      <li className="nav-item">
+        <button
+          className="btn hover-dark c-bg-green me-2"
+          type="submit"
+          onClick={() => changePageName("Profile")}
+        >
+          Προφιλ
+        </button>
+      </li>
+      <li className="nav-item">
+        <button
+          className="btn hover-dark c-bg-yellow me-2"
+          type="submit"
+          onClick={() => {
+            Axios.post("/logout")
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((e) => console.log(e));
+            logoutUser();
+          }}
+        >
+          Εξοδος
+        </button>
+      </li>
+    </>
+  );
+};
 
 function Navbar(state) {
-  const { changePageNameFn, updateSearchTerm, isUserLoggedIn, logoutUserFn } = state;
-  changePageName = changePageNameFn
-  logoutUser = logoutUserFn
+  const { changePageNameFn, updateSearchTerm, isUserLoggedIn, logoutUserFn } =
+    state;
+  changePageName = changePageNameFn;
+  logoutUser = logoutUserFn;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light c-bg-white">
@@ -104,7 +119,10 @@ function Navbar(state) {
                 Άρθρα
               </a>
             </li>
-            <SearchBox updateSearchTerm={updateSearchTerm} changePageNameFn={changePageName}/>
+            <SearchBox
+              updateSearchTerm={updateSearchTerm}
+              changePageNameFn={changePageName}
+            />
           </ul>
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -126,7 +144,11 @@ function Navbar(state) {
                 About
               </a>
             </li>
-            { isUserLoggedIn ? <UserLoggedInButtons /> : <UserNotLoggedInButtons/> }
+            {isUserLoggedIn ? (
+              <UserLoggedInButtons />
+            ) : (
+              <UserNotLoggedInButtons />
+            )}
           </ul>
         </div>
       </div>

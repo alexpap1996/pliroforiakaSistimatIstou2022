@@ -34,6 +34,9 @@ function MainBody(state) {
     signupError,
     setCurrentUserFn,
     isUserLoggedIn,
+    loggedInUser,
+    posts,
+    getArticlesFn,
   } = state
   const PageToReturn = pageMap[pageName]
 
@@ -47,9 +50,12 @@ function MainBody(state) {
         setCurrentUser={setCurrentUserFn}
         loginError={loginError}
         signupError={signupError}
+        posts={posts}
         searchTerm={searchTerm}
         pageData={pageData}
         isUserLoggedIn={isUserLoggedIn}
+        loggedInUser={loggedInUser}
+        getArticlesFn={getArticlesFn}
       />
     </>
   );
