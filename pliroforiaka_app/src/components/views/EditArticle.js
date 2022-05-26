@@ -20,6 +20,17 @@ const EditArticle = (state) => {
   const [description_n, setDescription] = useState("");
   const [articleFile_n, setArticleFile] = useState("");
 
+  const deleteArticle = (e) => {
+      e.preventDefault();
+      const data = new FormData();
+      data.append("id", _id);
+
+      Axios.delete("/deleteArticle", data , _id)
+        .then((res) => console.log("Delete Article = ", res.data))
+        .catch((e) => console.log(e));
+      changePageNameFn("Articles");
+    };
+
   const EditArticle = (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -75,14 +86,20 @@ const EditArticle = (state) => {
     accept=".jpg"
     className="form-control"
     onChange={(event) => {
-    const file = event.target.files[0];
-    setArticleFile(file);
+      const file = event.target.files[0];
+      setArticleFile(file);
     }}
     />
     </form>
     <button type="submit"  className="btn btn-danger mt-auto hover-dark" onClick={EditArticle}>Edit Article</button>
 
-      
+    <button type="submit"  className="btn btn-danger mt-auto hover-dark" onClick={deleteArticle}>Delete Article</button>
+    
+    {/* <form action="/deleteArticle?_method=DELETE" method="POST">
+      <button>Delete Article</button>
+    </form> */}
+
+
     </div>
         <motion.button
           className="btn mt-auto hover-dark c-bg-green mybtn1"

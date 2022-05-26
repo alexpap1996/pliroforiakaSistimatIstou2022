@@ -9,6 +9,7 @@ import Article from "./views/Article";
 import Signup from "./views/Signup";
 import Profile from "./views/Profile";
 import EditArticle from "./views/EditArticle";
+import CreateArticle from "./views/CreateArticle";
 
 const pageMap = {
   'Home': HomePage,
@@ -21,6 +22,7 @@ const pageMap = {
   'Signup': Signup,
   'Profile': Profile,
   'EditArticle' : EditArticle,
+  'CreateArticle' : CreateArticle,
 } 
 
 function MainBody(state) {

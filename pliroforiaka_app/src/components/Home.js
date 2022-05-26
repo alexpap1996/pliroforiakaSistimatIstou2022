@@ -16,6 +16,8 @@ const createArticle = (e) => {
   const bodyVal = formObj.find(el => el === 'body').value     // TODO FIX
   const descrVal = formObj.find(el => el === 'description').value   // TODO FIX
   const articleFileVal = formObj.find(el => el === 'articleFile').value   // TODO FIX
+  
+  
   const data = new FormData();
   data.append("title", titleVal);
   data.append("body", bodyVal);
@@ -222,53 +224,6 @@ const Home = (state) => {
         </button>
       </form>
 
-      {/* edit Article */}
-      <form>
-        <input
-          name="title"
-          type="text"
-          placeholder="Title..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setTitle(value);
-          }}
-        />
-        <input
-          name="body"
-          type="text"
-          placeholder="body..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setBody(value);
-          }}
-        />
-        <input
-          name="description"
-          type="text"
-          placeholder="description..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setDescription(value);
-          }}
-        />
-        <input
-          type="file"
-          accept=".jpg"
-          className="form-control"
-          onChange={(event) => {
-            const file = event.target.files[0];
-            setArticleFile(file);
-          }}
-        />
-        <button type="submit" onClick={editArticle}>
-          Edit Article
-        </button>
-      </form>
-
-      {/* delete Article */}
-      <form action="/deleteArticle?_method=DELETE" method="POST">
-        <button>Delete Article</button>
-      </form>
 
       {/* Article forms end */}
 

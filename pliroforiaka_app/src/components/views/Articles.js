@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import "../styles/Articles.css";
 import "../styles/ErrorPage.css";
 
@@ -52,11 +53,10 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
 }
 
 const Articles = (state) => {
-  const { getArticlesFn ,changePageNameFn, searchTerm , posts} = state;
-  // console.log(posts)
-  
-  const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn)
 
+  const { getArticlesFn ,changePageNameFn, searchTerm , posts} = state;
+  const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn);
+  
   return (
     <>
       <span className="title">Articles</span>
@@ -70,6 +70,14 @@ const Articles = (state) => {
         onClick={() => changePageNameFn("Home")}
       >
         Back To Home Page
+      </button>
+
+      <button
+        type="button"
+        className="btn btn-dark mx-3 mb-3"
+        onClick={() => changePageNameFn("CreateArticle")}
+      >
+        Create New Article
       </button>
     </>
   );
