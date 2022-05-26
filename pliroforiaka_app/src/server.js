@@ -190,7 +190,7 @@ app.patch(
   upload.single("articleFile"),
   async (req, res) => {
     try {
-      const id = "627ebc7566bb44f77421fc6c"; //taken from DB for now
+      const id = "628a0d433898b233a98d54b2"; //taken from DB for now
       const { title, body, description } = req.body;
       const article = await Article.findById(id);
       console.log("Article before edit = ", article);
@@ -222,7 +222,7 @@ app.patch(
 
 app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
   //need to add isAuthor middleware
-  const id = "627ebc7566bb44f77421fc6c"; //taken from DB for now
+  const id = "628a0d433898b233a98d54b2"; //taken from DB for now
   const article = await Article.findById(id);
   console.log("Article to be deleted = ", article);
   await Article.findByIdAndDelete(article._id);
@@ -231,16 +231,16 @@ app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
 
 app.post("/addLike", isLoggedIn, async (req, res) => {
   //need to add hasLiked middleware
-  const id = "627ebc11e8a25062de73dd6c"; //taken from DB for now
+  const id = "628a0f5651ba02b0cc1fc809"; //taken from DB for now
   const article = await Article.findById(id);
-  console.log("Article likes before = ",article.likeCounter )
+  console.log("Article likes before = ", article.likeCounter);
   article.likeCounter++;
   const userId = res.locals.currentUser;
   const user = await User.findById(userId);
   article.UserLikes.push(user);
   await article.save();
-  console.log("Article likes after = ",article.likeCounter )
-  console.log("Users liked article = ",article.UserLikes )
+  console.log("Article likes after = ", article.likeCounter);
+  console.log("Users liked article = ", article.UserLikes);
   // return res.redirect("/article");
 });
 
