@@ -12,18 +12,19 @@ import EditArticle from "./views/EditArticle";
 import CreateArticle from "./views/CreateArticle";
 
 const pageMap = {
-  Home: HomePage,
-  About: About,
-  ErrorPage: ErrorPage,
-  Articles: Articles,
-  CommunicationPage: CommunicationPage,
-  Login: Login,
-  Article: Article,
-  Signup: Signup,
-  Profile: Profile,
-  EditArticle: EditArticle,
-  CreateArticle: CreateArticle,
-};
+  'Home': HomePage,
+  'About': About,
+  'ErrorPage': ErrorPage,
+  'Articles': Articles,
+  'CommunicationPage': CommunicationPage,
+  'Login': Login,
+  'Article': Article,
+  'Signup': Signup,
+  'Profile': Profile,
+  'EditArticle' : EditArticle,
+  'CreateArticle' : CreateArticle,
+} 
+
 
 function MainBody(state) {
   const {

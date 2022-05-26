@@ -220,7 +220,7 @@ app.patch(
       const { title, body, description, id } = req.body;
       console.log(id); // Database ID Working properly
       const article = await Article.findById(id);
-      console.log("Article before edit = ", article);
+      // console.log("Article before edit = ", article);
       const editedArticle = await Article.findByIdAndUpdate(
         article._id,
         {
@@ -247,14 +247,21 @@ app.patch(
   }
 );
 
-app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
-  //need to add isAuthor middleware
-  const id = "628d15d7d777ea7547700c05"; //taken from DB for now
-  const article = await Article.findById(id);
-  console.log("Article to be deleted = ", article);
-  await Article.findByIdAndDelete(article._id);
-  // return res.redirect("/article");
-});
+app.delete(
+  "/deleteArticle",
+  isLoggedIn,
+  async (req, res) => {
+  try {  
+    const { title, body, description , id } = req.body;
+    console.log (id)
+    const article = await Article.findById(id);
+    console.log("Article to be deleted = ", article);
+    await Article.findByIdAndDelete(id);
+  }catch {
+      console.log("Error in Article DELETE");
+  }
+}
+);
 
 app.post(
   "/addLike",
