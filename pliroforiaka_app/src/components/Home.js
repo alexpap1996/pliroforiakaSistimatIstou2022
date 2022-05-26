@@ -104,78 +104,9 @@ const Home = (state) => {
         </button>
       </form>
 
-      {/* delete user */}
-      <form action="/deleteUser?_method=DELETE" method="POST">
-        <button>Delete User</button>
-      </form>
-
-      {/* edit user */}
-      <form>
-        <input
-          name="username"
-          type="text"
-          placeholder="Όνομα χρήστη..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setUsername(value);
-          }}
-        />
-        <input
-          name="firstName"
-          type="text"
-          placeholder="Όνομα..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setFirstName(value);
-          }}
-        />
-        <input
-          name="lastName"
-          type="text"
-          placeholder="Επώνυμο..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setLastName(value);
-          }}
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Διεύθυνση email..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setEmail(value);
-          }}
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Κωδικός..."
-          onChange={(event) => {
-            const { value } = event.target;
-            setPassword(value);
-          }}
-        />
-        <input
-          type="file"
-          id="image"
-          accept=".jpg"
-          className="form-control"
-          onChange={(event) => {
-            const file = event.target.files[0];
-            setFile(file);
-          }}
-        />
-        <button type="submit" onClick={send}>
-          Edit User
-        </button>
-      </form>
-
       <form action="/logout" method="POST">
         <button>Logout</button>
       </form>
-
-      {/* User forms end */}
 
       {/* Article forms start*/}
       <h3>Article backend</h3>
