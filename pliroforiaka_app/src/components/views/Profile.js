@@ -11,16 +11,17 @@ const Profile = (state) => {
     you can now access the user's properties with user.property
     properties are: email, firstname, lastName, image, role, username
   */
+  const { loggedInUser: user, isUserLoggedIn } = state;
 
   const { changePageNameFn, getArticlesFn } = state;
   changePageName = changePageNameFn;
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
-  const [file, setFile] = useState("");
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [password, setPassword] = useState(user.password);
+  const [file, setFile] = useState(user.image.url);
 
   const send = (e) => {
     e.preventDefault();
@@ -37,8 +38,6 @@ const Profile = (state) => {
       .catch((e) => console.log(e));
     changePageNameFn("Profile");
   };
-
-  const { loggedInUser: user, isUserLoggedIn } = state;
 
   if (!isUserLoggedIn) {
     return <ErrorPage errorCode="401" errorMessage="Δεν ειστε συνδεδεμενος" />;
