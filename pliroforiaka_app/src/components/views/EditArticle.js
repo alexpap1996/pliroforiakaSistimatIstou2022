@@ -43,7 +43,7 @@ const EditArticle = (state) => {
           src={image?.url}
           alt="article"
         />
-    <form>
+    <form className="editform">
     <div className="mb-3">
     <label htmlFor="exampleInputEmail1" className="form-label">Article's Title</label>
     <input placeholder={title}  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -80,7 +80,7 @@ const EditArticle = (state) => {
     }}
     />
     </form>
-    <button type="submit"  className="btn btn-danger mt-auto hover-dark" onClick={EditArticle}>Edit Article</button>
+    <button type="submit"  className="btn btn-danger mt-auto hover-dark mybtn_edit" onClick={EditArticle}>Edit Article</button>
 
       
     </div>

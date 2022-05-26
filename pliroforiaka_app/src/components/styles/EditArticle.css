@@ -1,4 +1,5 @@
 .myContainer {
+    padding-top: 40px;
     display: flex;
     flex-direction: row;
 }
@@ -6,5 +7,19 @@
 .myimg1 {
     width: 450px;
     height: auto;
+    padding-right: 20px
 }
 
+.mybtn_edit {
+    margin-left: -320px;
+    margin-bottom: -50px;
+}
+
+.editform {
+    padding-left: 70px;
+}
+
+.mybtn1 {
+    margin-bottom: -250px;
+    margin-left: 625px;
+}
