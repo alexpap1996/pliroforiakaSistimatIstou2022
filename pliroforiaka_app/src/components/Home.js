@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import staticData from "../staticData";
 import Axios from "axios";
 
+const mystring = "backup"
+
 let getArticles
 let changePageName
 const { articles } = staticData;
