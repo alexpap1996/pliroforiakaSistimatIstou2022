@@ -53,36 +53,16 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
 };
 
 const Articles = (state) => {
-<<<<<<< HEAD
 
   const { getArticlesFn ,changePageNameFn, searchTerm , posts} = state;
   const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn);
   
-=======
-  const { getArticlesFn, changePageNameFn, searchTerm, posts } = state;
-  // console.log(posts)
-
-  const filteredArticles = getFilteredArticles(
-    posts,
-    searchTerm,
-    changePageNameFn
-  );
-
->>>>>>> 48146e7d5932a4fb3cb34ef6c36fe83a0751997d
   return (
     <>
       <span className="title">Articles</span>
       {searchTerm && displayingResultsText(searchTerm, filteredArticles.length)}
       <div className="container article-container">{filteredArticles}</div>
       <div className="containerCenter mt-3">
-        <motion.button
-          className="center btn mt-auto hover-dark c-bg-green bottom mybtn"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.1, type: "tween" }}
-          onClick={() => changePageNameFn("CreateArticle")}
-        >
-          Create new article
-        </motion.button>
       </div>
       <button
         type="button"
