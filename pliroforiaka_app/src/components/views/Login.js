@@ -26,6 +26,7 @@ const Login = (props) => {
     await Axios.post("/login", { username, password })
       .then((res) => {
         if (res.data) {
+          console.log(res.data)
           setCurrentUser(res.data);
           setLoginError(undefined);
           changePageNameFn("Home");

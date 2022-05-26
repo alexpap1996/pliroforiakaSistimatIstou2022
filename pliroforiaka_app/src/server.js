@@ -100,7 +100,9 @@ app.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
   async (req, res) => {
-    const currentUser = await User.findById(res.locals.currentUser);
+    const currentUser = await User.findById(res.locals.currentUser).populate(
+      "image"
+    );
     console.log("LOGGED IN SUCCESFULLY");
     console.log(currentUser); // TODO - FIX NOT WORKING
     res.json(currentUser);
@@ -247,21 +249,17 @@ app.patch(
   }
 );
 
-app.delete(
-  "/deleteArticle",
-  isLoggedIn,
-  async (req, res) => {
-  try {  
-    const { title, body, description , id } = req.body;
-    console.log (id)
+app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
+  try {
+    const { title, body, description, id } = req.body;
+    console.log(id);
     const article = await Article.findById(id);
     console.log("Article to be deleted = ", article);
     await Article.findByIdAndDelete(id);
-  }catch {
-      console.log("Error in Article DELETE");
+  } catch {
+    console.log("Error in Article DELETE");
   }
-}
-);
+});
 
 app.post(
   "/addLike",
