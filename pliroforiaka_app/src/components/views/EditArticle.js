@@ -96,4 +96,5 @@ const EditArticle = (state) => {
   );
 };
 
+>>>>>>> origin/daxaka
 export default EditArticle;
