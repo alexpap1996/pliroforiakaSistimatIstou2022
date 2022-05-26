@@ -13,14 +13,13 @@ const Profile = (state) => {
   */
   const { loggedInUser: user, isUserLoggedIn } = state;
 
-  const { changePageNameFn, getArticlesFn } = state;
+  const { changePageNameFn } = state;
   changePageName = changePageNameFn;
 
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [password, setPassword] = useState(user.password);
   const [file, setFile] = useState(user.image.url);
 
   const send = (e) => {
@@ -30,7 +29,6 @@ const Profile = (state) => {
     data.append("firstName", firstName);
     data.append("lastName", lastName);
     data.append("email", email);
-    data.append("password", password);
     data.append("file", file);
 
     Axios.patch("/editUser", data)
@@ -145,20 +143,6 @@ const Profile = (state) => {
                       }}
                     />
                   </div>
-                  <div className="mb-3 p-form-control-wrapper">
-                    <label className="small mb-1" htmlFor="password">
-                      <b>Κωδικός</b>
-                    </label>
-                    <input
-                      name="password"
-                      type="password"
-                      placeholder="Κωδικός..."
-                      onChange={(event) => {
-                        const { value } = event.target;
-                        setPassword(value);
-                      }}
-                    />
-                  </div>
                   <button
                     className="btn btn-primary"
                     type="submit"
@@ -167,6 +151,13 @@ const Profile = (state) => {
                     Αποθήκευση
                   </button>
                 </form>
+                <div className="d-flex flex-row-reverse">
+                  <form action="/deleteUser?_method=DELETE" method="POST">
+                    <button className="btn btn-danger">
+                      Διαγραφή Λογαριασμού
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
