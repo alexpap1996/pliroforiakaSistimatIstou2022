@@ -13,11 +13,12 @@
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 10px;
-  
 }
 
 .mybtn {
   align-self: flex-start;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .title {
@@ -28,4 +29,25 @@
   border-top: 2px solid rgb(36, 134, 98);
   box-shadow: 2px 4px 5px #888888; */
   margin-top: 10px;
+}
+
+.btn_container {
+}
+
+.right_button {
+  margin-left: 115px;
+  margin-bottom: 10px;
+  text-decoration: dotted;
+}
+
+.center {
+  margin: 0;
+  position: sticky;
+  top: 50%;
+  left: 50%;
+}
+
+.containerCenter {
+  height: 200px;
+  position: relative;
 }

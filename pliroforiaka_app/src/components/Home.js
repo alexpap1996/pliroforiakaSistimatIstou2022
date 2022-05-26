@@ -12,12 +12,15 @@ const createArticle = (e) => {
   e.preventDefault();
   const form = document.querySelector('#create')
   const formObj = [...form.elements]
-  const titleVal = formObj.find(el => el === 'title').value
+  const titleVal = formObj.find(el => el === 'title').value   // TODO FIX
+  const bodyVal = formObj.find(el => el === 'body').value     // TODO FIX
+  const descrVal = formObj.find(el => el === 'description').value   // TODO FIX
+  const articleFileVal = formObj.find(el => el === 'articleFile').value   // TODO FIX
   const data = new FormData();
   data.append("title", titleVal);
-  data.append("body", "body");
-  data.append("description", "description");
-  data.append("articleFile", "articleFile");
+  data.append("body", bodyVal);
+  data.append("description", descrVal);
+  data.append("articleFile", articleFileVal); // Not sure
 
   Axios.post("/createArticle", data)
     .then((res) => {
