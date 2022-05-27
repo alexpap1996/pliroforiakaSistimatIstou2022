@@ -13,6 +13,7 @@ const Login = (props) => {
     changePageNameFn,
   } = props;
 
+  const [visible, setVisible] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,13 +26,15 @@ const Login = (props) => {
     await Axios.post("/login", { username, password })
       .then((res) => {
         if (res.data) {
+          console.log(res.data)
           setCurrentUser(res.data);
           setLoginError(undefined);
           changePageNameFn("Home");
         }
       })
-      .catch((e) => console.log(e));
-    changePageNameFn("Home");
+      .catch(() => {
+        setVisible(true);
+      });
   };
 
   return (
@@ -76,6 +79,11 @@ const Login = (props) => {
             />
             <div className="valid-feedback">Looks good!</div>
           </div>
+          {visible && (
+            <div className="alert alert-danger" role="alert">
+              Λάθος στοιχεία!
+            </div>
+          )}
           <button className="btn btn-success btn-block" onClick={login}>
             Login
           </button>

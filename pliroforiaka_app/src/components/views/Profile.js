@@ -1,17 +1,47 @@
 import "../styles/Profile.css";
-import anon from "../../resources/anon.PNG"
-import ErrorPage from "./ErrorPage"
+import anon from "../../resources/anon.PNG";
+import React, { useState } from "react";
+import ErrorPage from "./ErrorPage";
+import Axios from "axios";
+
+let changePageName;
 
 const Profile = (state) => {
-  const { loggedInUser: user, isUserLoggedIn} = state
   /* 
     you can now access the user's properties with user.property
     properties are: email, firstname, lastName, image, role, username
   */
-  if (!isUserLoggedIn) {
-    return <ErrorPage errorCode='401' errorMessage='Δεν ειστε συνδεδεμενος'/>
-  } 
+  const { loggedInUser: user, isUserLoggedIn } = state;
 
+  const { changePageNameFn, getArticlesFn } = state;
+  changePageName = changePageNameFn;
+
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [password, setPassword] = useState(user.password);
+  const [file, setFile] = useState(user.image.url);
+
+  const send = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("username", username);
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("file", file);
+
+    Axios.patch("/editUser", data)
+      .then((res) => console.log("Edited user data = ", res.data))
+      .catch((e) => console.log(e));
+    changePageNameFn("Profile");
+  };
+
+  if (!isUserLoggedIn) {
+    return <ErrorPage errorCode="401" errorMessage="Δεν ειστε συνδεδεμενος" />;
+  }
   return (
     <div>
       <div className="container-xl px-4 mt-4">
@@ -28,15 +58,23 @@ const Profile = (state) => {
               <div className="card-body text-center">
                 <img
                   className="profileImg rounded-circle mb-2"
-                  src={anon}
+                  src={user.image.url}
                   alt=""
                 />
                 <div className="small font-italic text-muted mb-4">
                   JPG ή PNG μέχρι 5MB
                 </div>
-                <button className="btn btn-primary" type="button">
-                  Aνεβάστε νέα εικόνα
-                </button>
+                <label htmlFor="myfile">Ανεβάστε μια καινούργια εικόνα</label>
+                <input
+                  type="file"
+                  id="image"
+                  accept=".jpg"
+                  className="form-control"
+                  onChange={(event) => {
+                    const file = event.target.files[0];
+                    setFile(file);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -46,50 +84,86 @@ const Profile = (state) => {
               <div className="card-body">
                 <form>
                   <div className="mb-3 p-form-control-wrapper">
-                    <label className="small mb-1" htmlFor="username"></label>
+                    <label className="small mb-1" htmlFor="username">
+                      <b>Όνομα χρήστη</b>
+                    </label>
                     <input
-                      className="form-control"
-                      id="username"
+                      name="username"
                       type="text"
+                      defaultValue={user.username}
                       placeholder="Όνομα χρήστη..."
+                      onChange={(event) => {
+                        const { value } = event.target;
+                        setUsername(value);
+                      }}
                     />
                   </div>
                   <div className="row gx-3 mb-3">
                     <div className="col-md-6 p-form-control-wrapper">
-                      <label
-                        className="small mb-1"
-                        htmlFor="firstName"
-                      ></label>
+                      <label className="small mb-1" htmlFor="firstName">
+                        <b>Όνομα</b>
+                      </label>
                       <input
-                        className="form-control"
-                        id="firstName"
+                        name="firstName"
                         type="text"
                         placeholder="Όνομα..."
+                        defaultValue={user.firstName}
+                        onChange={(event) => {
+                          const { value } = event.target;
+                          setFirstName(value);
+                        }}
                       />
                     </div>
                     <div className="col-md-6 p-form-control-wrapper">
-                      <label className="small mb-1" htmlFor="lastName"></label>
+                      <label className="small mb-1" htmlFor="lastName">
+                        <b>Επώνυμο</b>
+                      </label>
                       <input
-                        className="form-control"
-                        id="lastName"
+                        name="lastName"
                         type="text"
                         placeholder="Επώνυμο..."
+                        defaultValue={user.lastName}
+                        onChange={(event) => {
+                          const { value } = event.target;
+                          setLastName(value);
+                        }}
                       />
                     </div>
                   </div>
                   <div className="mb-3 p-form-control-wrapper">
-                    <label
-                      className="small mb-1"
-                      htmlFor="email"
-                    ></label>
+                    <label className="small mb-1" htmlFor="email">
+                      <b>email</b>
+                    </label>
                     <input
-                      className="form-control"
-                      id="email"
+                      name="email"
                       type="email"
                       placeholder="Διεύθυνση email..."
+                      defaultValue={user.email}
+                      onChange={(event) => {
+                        const { value } = event.target;
+                        setEmail(value);
+                      }}
                     />
                   </div>
-                  <button className="btn btn-primary" type="button">
+                  <div className="mb-3 p-form-control-wrapper">
+                    <label className="small mb-1" htmlFor="password">
+                      <b>Κωδικός</b>
+                    </label>
+                    <input
+                      name="password"
+                      type="password"
+                      placeholder="Κωδικός..."
+                      onChange={(event) => {
+                        const { value } = event.target;
+                        setPassword(value);
+                      }}
+                    />
+                  </div>
+                  <button
+                    className="btn btn-primary"
+                    type="submit"
+                    onClick={send}
+                  >
                     Αποθήκευση
                   </button>
                 </form>

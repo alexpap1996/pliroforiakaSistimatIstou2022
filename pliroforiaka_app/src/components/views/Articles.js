@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import "../styles/Articles.css";
 import "../styles/ErrorPage.css";
-import staticData from "../../staticData"
-
-const { articles } = staticData
 
 const displayingResultsText = (searchTerm, numOfArticles) => {
   return (
@@ -11,11 +9,11 @@ const displayingResultsText = (searchTerm, numOfArticles) => {
       <span className="">Displaying results for: "{searchTerm}"</span>
       <span>{numOfArticles} articles found</span>
     </div>
-  )
-}
+  );
+};
 
 const getFilteredArticles = (articles, Term, changePageNameFn) => {
-  return Object.values(articles)
+  return articles
     .filter((article) => {
       if (!Term) return article;
       else if (article.title.toLowerCase().includes(Term.toLowerCase()))
@@ -25,40 +23,46 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
       <div className="card myCard mx-3" key={key + article.title}>
         <img
           className="card-img-top myimg"
-          src={article.imgUrl}
+          src={article.image?.url}
           alt="article"
         />
         <div className="card-body d-flex flex-column">
           <h5 className="card-title">{article.title}</h5>
-          <p className="card-text">{article.articleDescription}</p>
+          <p className="card-text">{article.description}</p>
+        </div>
+        <div className="btn_container">
           <motion.button
             className="btn mt-auto hover-dark c-bg-green bottom mybtn"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.1, type: "tween" }}
-            onClick={() => changePageNameFn("Article", getArticleData(article.articleId))}
+            onClick={() => changePageNameFn("Article", article)}
           >
             Read more
           </motion.button>
+          <motion.button
+            className="btn btn-dark mt-auto hover-dark bottom right_button"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.1, type: "tween" }}
+            onClick={() => changePageNameFn("EditArticle", article)}
+          >
+            Edit article
+          </motion.button>
         </div>
       </div>
-    ))
-}
-
-const getArticleData = (articleId) => {
-  return articles[articleId]
-}
+    ));
+};
 
 const Articles = (state) => {
-  const { changePageNameFn, searchTerm } = state;
 
-  const filteredArticles = getFilteredArticles(articles, searchTerm, changePageNameFn)
-
+  const { getArticlesFn ,changePageNameFn, searchTerm , posts} = state;
+  const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn);
+  
   return (
     <>
       <span className="title">Articles</span>
       {searchTerm && displayingResultsText(searchTerm, filteredArticles.length)}
-      <div className="container article-container">
-        {filteredArticles}
+      <div className="container article-container">{filteredArticles}</div>
+      <div className="containerCenter mt-3">
       </div>
       <button
         type="button"
@@ -66,6 +70,14 @@ const Articles = (state) => {
         onClick={() => changePageNameFn("Home")}
       >
         Back To Home Page
+      </button>
+
+      <button
+        type="button"
+        className="btn btn-dark mx-3 mb-3"
+        onClick={() => changePageNameFn("CreateArticle")}
+      >
+        Create New Article
       </button>
     </>
   );

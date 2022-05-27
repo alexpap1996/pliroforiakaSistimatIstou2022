@@ -1,13 +1,15 @@
 import React from "react";
-import HomePage from './views/HomePage'
-import About from "./views/About"
-import ErrorPage from './views/ErrorPage'
+import HomePage from "./views/HomePage";
+import About from "./views/About";
+import ErrorPage from "./views/ErrorPage";
 import Articles from "./views/Articles";
 import CommunicationPage from "./views/CommunicationPage";
 import Login from "./views/Login";
 import Article from "./views/Article";
 import Signup from "./views/Signup";
 import Profile from "./views/Profile";
+import EditArticle from "./views/EditArticle";
+import CreateArticle from "./views/CreateArticle";
 
 const pageMap = {
   'Home': HomePage,
@@ -19,12 +21,15 @@ const pageMap = {
   'Article': Article,
   'Signup': Signup,
   'Profile': Profile,
+  'EditArticle' : EditArticle,
+  'CreateArticle' : CreateArticle,
 } 
 
+
 function MainBody(state) {
-  const { 
-    pageName, 
-    changePageNameFn, 
+  const {
+    pageName,
+    changePageNameFn,
     validateUserFn,
     searchTerm,
     pageData,
@@ -35,12 +40,14 @@ function MainBody(state) {
     setCurrentUserFn,
     isUserLoggedIn,
     loggedInUser,
-  } = state
-  const PageToReturn = pageMap[pageName]
+    posts,
+    getArticlesFn,
+  } = state;
+  const PageToReturn = pageMap[pageName];
 
   return (
     <>
-      <PageToReturn 
+      <PageToReturn
         changePageNameFn={changePageNameFn}
         validateUserFn={validateUserFn}
         setLoginError={setLoginErrorFn}
@@ -48,10 +55,12 @@ function MainBody(state) {
         setCurrentUser={setCurrentUserFn}
         loginError={loginError}
         signupError={signupError}
+        posts={posts}
         searchTerm={searchTerm}
         pageData={pageData}
         isUserLoggedIn={isUserLoggedIn}
         loggedInUser={loggedInUser}
+        getArticlesFn={getArticlesFn}
       />
     </>
   );
