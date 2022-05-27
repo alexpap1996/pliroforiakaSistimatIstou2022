@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import staticData from "../staticData";
 import Axios from "axios";
 
-const mystring = "backup"
+// const mystring = "backup"
 
 let getArticles
 let changePageName
@@ -110,11 +110,11 @@ const Home = (state) => {
         <button>Logout</button>
       </form>
 
-      {/* Article forms start*/}
-      <h3>Article backend</h3>
+      {/* Article forms start
+      <h3>Article backend</h3> */}
 
       {/* Create Article */}
-
+{/* 
       <form name="create" id="create">
         <input
           name="title"
@@ -156,7 +156,7 @@ const Home = (state) => {
           Create Article
         </button>
       </form>
-
+ */}
 
       {/* Article forms end */}
 

@@ -249,10 +249,13 @@ app.patch(
   }
 );
 
-app.delete("/deleteArticle", isLoggedIn, async (req, res) => {
+app.delete("/deleteArticle",
+//  isLoggedIn,
+  async (req, res) => {
   try {
     const { title, body, description, id } = req.body;
-    console.log(id);
+    console.log(req.body)
+    console.log( id );
     const article = await Article.findById(id);
     console.log("Article to be deleted = ", article);
     await Article.findByIdAndDelete(id);
