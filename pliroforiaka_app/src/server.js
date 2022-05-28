@@ -91,21 +91,27 @@ app.get("/articles", async (req, res) => {
   }
 });
 
-app.post("/testLogin", isLoggedIn, async (req, res) => {
+app.post("/getUser", isLoggedIn, async (req, res) => {
   const user = await User.findById(res.locals.currentUser);
+  console.log(user);
   res.json(user);
 });
 
 app.post(
   "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
+  passport.authenticate("local"),  //{ failureRedirect: "/login" }
   async (req, res) => {
-    const currentUser = await User.findById(res.locals.currentUser).populate(
-      "image"
-    );
-    console.log("LOGGED IN SUCCESFULLY");
-    console.log(currentUser); // TODO - FIX NOT WORKING
-    res.json(currentUser);
+    // const currentUser = await User.findById(res.locals.currentUser)
+    const currentUser = await User.findById(req.user._id)
+    res.json(currentUser)
+    
+    // .populate(
+    //   "image"
+    // );
+    // console.log("LOGGED IN SUCCESFULLY");
+    // console.log("body" , res.body);
+    // console.log(req.user);   
+    // res.json("user",currentUser);
   }
 );
 
@@ -214,7 +220,7 @@ app.post(
 
 app.patch(
   "/EditArticle",
-  isLoggedIn,
+  // isLoggedIn,
   //need to add isAuthor middleware
   upload.single("articleFile"),
   async (req, res) => {

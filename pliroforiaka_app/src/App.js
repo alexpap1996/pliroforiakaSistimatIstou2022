@@ -70,16 +70,18 @@ class App extends React.Component {
   setCurrentUser (loggedInUser) {
     this.setState({ loggedInUser })
     this.setState({ isUserLoggedIn: true })
+    localStorage.setItem('user', JSON.stringify(loggedInUser))
   }
 
   async logoutUser (){
     this.setState({isUserLoggedIn: false})
     this.setState({ loggedInUser: undefined })
+    this.setState({ author_id : undefined})
     this.changePageName('Home')
   }
 
   async getID (){
-  axios.post("/testLogin").then (res => {
+  axios.post("/getUser").then (res => {
     this.setState({ author_id : res.data._id})
   })
   }
@@ -92,6 +94,7 @@ class App extends React.Component {
       
 
   render() {
+
     return (
       <div className="background-custom">
         <Helmet>
@@ -106,6 +109,7 @@ class App extends React.Component {
           isUserLoggedIn={this.state.isUserLoggedIn}
           loggedInUser={this.state.loggedInUser}
           logoutUserFn={this.logoutUser}
+          author_id = {this.state.author_id}
         />
         <MainBody
           posts = {this.state.posts}

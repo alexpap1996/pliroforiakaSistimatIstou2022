@@ -42,7 +42,7 @@ const getFilteredArticles = (articles, Term, changePageNameFn , author_id) => {
           >
             Read more
           </motion.button>
-          
+          {/* author_id === article.author */}
            {( author_id === article.author ) ?( 
           <motion.button
             className="btn btn-dark mt-auto hover-dark bottom right_button"
@@ -52,7 +52,7 @@ const getFilteredArticles = (articles, Term, changePageNameFn , author_id) => {
           >
             Edit article
           </motion.button>
-           ) : console.log(article.author) }
+           ) : <></> }
           
 
         </div>

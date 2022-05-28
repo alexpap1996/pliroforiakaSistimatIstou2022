@@ -1,6 +1,6 @@
 import "../styles/Profile.css";
 import anon from "../../resources/anon.PNG";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ErrorPage from "./ErrorPage";
 import Axios from "axios";
 
@@ -11,16 +11,27 @@ const Profile = (state) => {
     you can now access the user's properties with user.property
     properties are: email, firstname, lastName, image, role, username
   */
-  const { loggedInUser: user, isUserLoggedIn } = state;
+  // const { isUserLoggedIn } = state;
+  // const { changePageNameFn } = state;
+  // changePageName = changePageNameFn;
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const getData = async () => {
+      const res = await Axios.post("/getUser")
+      const user = res.data 
+      if (user) {
+        setUser(user);
+      }
+    }
+    getData();
+  })
 
-  const { changePageNameFn } = state;
-  changePageName = changePageNameFn;
 
-  const [username, setUsername] = useState(user.username);
-  const [email, setEmail] = useState(user.email);
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [file, setFile] = useState(user.image.url);
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [file, setFile] = useState();
 
   const send = (e) => {
     e.preventDefault();
@@ -34,10 +45,10 @@ const Profile = (state) => {
     Axios.patch("/editUser", data)
       .then((res) => console.log("Edited user data = ", res.data))
       .catch((e) => console.log(e));
-    changePageNameFn("Profile");
+    // changePageNameFn("Profile");
   };
 
-  if (!isUserLoggedIn) {
+  if (!user) {
     return <ErrorPage errorCode="401" errorMessage="Δεν ειστε συνδεδεμενος" />;
   }
   return (

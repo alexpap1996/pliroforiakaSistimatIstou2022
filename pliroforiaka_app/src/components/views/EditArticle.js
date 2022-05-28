@@ -33,7 +33,7 @@ const EditArticle = (state) => {
       .then((res) => console.log("Edited article = ", res.data))
       .catch((e) => console.log(e));
     changePageNameFn("Articles");
-  
+    window.location.reload(false)  // Bullying
   };
 
 

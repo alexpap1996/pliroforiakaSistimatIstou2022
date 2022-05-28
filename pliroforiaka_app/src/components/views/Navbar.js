@@ -63,7 +63,7 @@ const UserLoggedInButtons = () => {
 };
 
 function Navbar(state) {
-  const { changePageNameFn, updateSearchTerm, isUserLoggedIn, logoutUserFn } =
+  const { changePageNameFn, updateSearchTerm, isUserLoggedIn, logoutUserFn , author_id } =
     state;
   changePageName = changePageNameFn;
   logoutUser = logoutUserFn;
@@ -144,7 +144,7 @@ function Navbar(state) {
                 About
               </a>
             </li>
-            {isUserLoggedIn ? (
+            { author_id ? (
               <UserLoggedInButtons />
             ) : (
               <UserNotLoggedInButtons />

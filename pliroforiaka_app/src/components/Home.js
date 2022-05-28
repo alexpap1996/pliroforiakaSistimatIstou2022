@@ -42,7 +42,7 @@ const Home = (state) => {
   getArticles = getArticlesFn
   const testLogin = (e) => {
     e.preventDefault();
-    Axios.post("/testLogin")
+    Axios.post("/getUser")
       .then((res) => console.log("You are logged in as ", res.data))
       .catch((e) => console.log(e));
   };

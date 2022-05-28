@@ -30,9 +30,13 @@ const Login = (props) => {
           setCurrentUser(res.data);
           setLoginError(undefined);
           changePageNameFn("Home");
+          window.location.reload(false);
+        } else {
+          setLoginError("Wrong Credentials");
         }
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         setVisible(true);
       });
   };
