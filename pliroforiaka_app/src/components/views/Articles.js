@@ -3,6 +3,9 @@ import { useState } from "react";
 import "../styles/Articles.css";
 import "../styles/ErrorPage.css";
 
+
+
+
 const displayingResultsText = (searchTerm, numOfArticles) => {
   return (
     <div className="d-flex flex-column align-items-center">
@@ -12,7 +15,7 @@ const displayingResultsText = (searchTerm, numOfArticles) => {
   );
 };
 
-const getFilteredArticles = (articles, Term, changePageNameFn) => {
+const getFilteredArticles = (articles, Term, changePageNameFn , author_id) => {
   return articles
     .filter((article) => {
       if (!Term) return article;
@@ -39,6 +42,8 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
           >
             Read more
           </motion.button>
+          
+           {( author_id === article.author ) ?( 
           <motion.button
             className="btn btn-dark mt-auto hover-dark bottom right_button"
             whileHover={{ scale: 1.05 }}
@@ -47,6 +52,9 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
           >
             Edit article
           </motion.button>
+           ) : console.log(article.author) }
+          
+
         </div>
       </div>
     ));
@@ -54,8 +62,8 @@ const getFilteredArticles = (articles, Term, changePageNameFn) => {
 
 const Articles = (state) => {
 
-  const { getArticlesFn ,changePageNameFn, searchTerm , posts} = state;
-  const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn);
+  const { getArticlesFn ,changePageNameFn, searchTerm , posts , author_id } = state;
+  const filteredArticles = getFilteredArticles(posts, searchTerm, changePageNameFn , author_id );
   
   return (
     <>

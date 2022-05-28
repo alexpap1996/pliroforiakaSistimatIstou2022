@@ -42,6 +42,7 @@ function MainBody(state) {
     loggedInUser,
     posts,
     getArticlesFn,
+    author_id,
   } = state;
   const PageToReturn = pageMap[pageName];
 
@@ -56,6 +57,7 @@ function MainBody(state) {
         loginError={loginError}
         signupError={signupError}
         posts={posts}
+        author_id={author_id}
         searchTerm={searchTerm}
         pageData={pageData}
         isUserLoggedIn={isUserLoggedIn}

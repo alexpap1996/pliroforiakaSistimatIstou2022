@@ -19,15 +19,17 @@ class App extends React.Component {
     isUserLoggedIn: false,
     loggedInUser: undefined,
     posts : [],
+    author_id : "",
   };
 
 
   constructor(props) {
     super(props);
     this.getArticles(); 
+    this.getID();
 
 
-
+    this.getID = this.getID.bind(this)
     this.changePageName = this.changePageName.bind(this);
     this.validateUser = this.validateUser.bind(this);
     this.updateSearchTerm = this.updateSearchTerm.bind(this)
@@ -74,7 +76,12 @@ class App extends React.Component {
     this.setState({isUserLoggedIn: false})
     this.setState({ loggedInUser: undefined })
     this.changePageName('Home')
-    
+  }
+
+  async getID (){
+  axios.post("/testLogin").then (res => {
+    this.setState({ author_id : res.data._id})
+  })
   }
 
   async getArticles (){
@@ -115,6 +122,8 @@ class App extends React.Component {
           setSignupErrorFn={this.setSignupError}
           setCurrentUserFn={this.setCurrentUser}
           getArticlesFn={this.getArticles}
+          author_id = {this.state.author_id}
+          getID={this.getID}
         />
       </div>
     );
